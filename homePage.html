@@ -3,1573 +3,1234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALEX DESIGN — Portfolio</title>
+<title>Alex — Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --graphite: #3C3744;
-    --tangerine: #F7A278;
-    --blue: #008DD5;
-    --yellow: #EDF060;
-    --turquoise: #15E6CD;
-    --white: #FAFAF8;
-    --black: #0D0D0D;
-  }
+:root {
+  --graphite: #3C3744;
+  --graphite-deep: #2A2730;
+  --graphite-mid: #4D4858;
+  --tangerine: #F7A278;
+  --blue: #008DD5;
+  --turquoise: #15E6CD;
+  --white: #FAFAF8;
+  --off-white: #F2F0EB;
+  --muted: rgba(250,248,245,0.55);
+  --subtle: rgba(250,248,245,0.12);
+  --line: rgba(250,248,245,0.1);
+}
 
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-  html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--graphite-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--graphite);
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* ── CURSOR ── */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--turquoise); border-radius: 50%;
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+.cursor.big { width: 44px; height: 44px; background: var(--tangerine); opacity: 0.7; }
 
-  /* Custom cursor */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--blue);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.2s, width 0.2s, height 0.2s;
-    mix-blend-mode: multiply;
-  }
-  .cursor.big {
-    width: 48px; height: 48px;
-    background: var(--yellow);
-  }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.75rem; height: 68px;
+  background: var(--graphite-deep);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 600;
+  color: var(--white); text-decoration: none; cursor: none;
+  letter-spacing: -0.01em;
+}
+.nav-logo em { color: var(--turquoise); font-style: italic; }
+.nav-links { display: flex; gap: 0.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 400;
+  color: var(--muted); text-decoration: none;
+  padding: 0.4rem 1rem; border-radius: 100px;
+  transition: all .2s; cursor: none;
+}
+.nav-links a:hover { color: var(--white); background: var(--subtle); }
+.nav-links a.active { color: var(--white); background: var(--subtle); }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 3rem;
-    height: 72px;
-    background: var(--graphite);
-    border-bottom: 3px solid var(--yellow);
-  }
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  display: none; align-items: center; gap: 0.6rem;
+  padding: 0 2.75rem; height: 40px;
+  background: var(--graphite-deep);
+  border-bottom: 1px solid var(--line);
+  position: fixed; top: 68px; left: 0; right: 0; z-index: 200;
+}
+.breadcrumb.visible { display: flex; }
+.breadcrumb-back {
+  font-size: 0.8rem; color: var(--turquoise); cursor: none;
+  background: none; border: none; display: flex; align-items: center; gap: 0.35rem;
+  transition: opacity .15s;
+}
+.breadcrumb-back:hover { opacity: 0.6; }
+.breadcrumb-sep { color: var(--line); font-size: 0.9rem; }
+.breadcrumb-label { font-size: 0.8rem; color: var(--muted); }
 
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--white);
-    letter-spacing: 0.06em;
-    text-decoration: none;
-    cursor: none;
-  }
-  .nav-logo span { color: var(--yellow); }
+/* ── PAGES / SUBPAGES ── */
+.page { display: none; min-height: 100vh; padding-top: 68px; }
+.page.active { display: block; }
+.subpage { display: none; min-height: 100vh; padding-top: 108px; }
+.subpage.active { display: block; }
+.enter { animation: fadeUp .4s ease both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
 
-  .nav-links {
-    display: flex; gap: 0.25rem;
-    list-style: none;
-  }
+/* ── SHARED ── */
+.btn {
+  font-size: 0.85rem; font-weight: 500;
+  padding: 0.75rem 1.75rem; border-radius: 100px;
+  border: 1.5px solid; text-decoration: none;
+  display: inline-block; transition: all .2s; cursor: none;
+}
+.btn-light { background: var(--white); border-color: var(--white); color: var(--graphite-deep); }
+.btn-light:hover { background: transparent; color: var(--white); }
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--muted); }
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+.btn-teal { background: var(--turquoise); border-color: var(--turquoise); color: var(--graphite-deep); }
+.btn-teal:hover { background: transparent; color: var(--turquoise); }
+.btn-dark { background: var(--graphite); border-color: var(--graphite); color: var(--white); }
+.btn-dark:hover { background: transparent; border-color: rgba(60,55,68,0.4); color: var(--graphite); }
 
-  .nav-links a {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 1.5px solid transparent;
-    transition: all 0.2s;
-    cursor: none;
-  }
-  .nav-links a:hover, .nav-links a.active {
-    border-color: var(--turquoise);
-    color: var(--turquoise);
-  }
+/* section divider */
+.divider { border: none; border-top: 1px solid var(--line); margin: 0; }
 
-  /* PAGES */
-  .page { display: none; min-height: 100vh; padding-top: 72px; }
-  .page.active { display: block; }
+footer {
+  background: var(--graphite-deep);
+  padding: 3.5rem 2.75rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+  border-top: 1px solid var(--line);
+}
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); }
+.footer-logo em { color: var(--turquoise); font-style: italic; }
+.footer-links { display: flex; gap: 1.75rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; cursor: none; transition: color .2s; }
+.footer-links a:hover { color: var(--turquoise); }
+.footer-copy { font-size: 0.75rem; color: rgba(250,248,245,0.2); }
 
-  /* ============ HOME PAGE ============ */
-  #home {
-    background: var(--graphite);
-    position: relative;
-    overflow: hidden;
-  }
 
-  .home-hero {
-    min-height: calc(100vh - 72px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 3rem;
-    position: relative;
-  }
+/* ══════════════════════════════════
+   HOME PAGE
+══════════════════════════════════ */
+#home { background: var(--graphite-deep); }
 
-  .home-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--turquoise);
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .home-eyebrow::before {
-    content: '';
-    display: block; width: 40px; height: 2px;
-    background: var(--turquoise);
-  }
+/* Hero — full screen, centered */
+.home-hero {
+  min-height: calc(100vh - 68px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 4rem 2.75rem;
+  position: relative; overflow: hidden;
+}
 
-  .home-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(6rem, 15vw, 14rem);
-    line-height: 0.88;
-    color: var(--white);
-    letter-spacing: -0.01em;
-  }
+/* soft ambient blobs */
+.home-hero::before {
+  content: '';
+  position: absolute; width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,141,213,0.18) 0%, transparent 70%);
+  top: -100px; left: -100px; pointer-events: none;
+}
+.home-hero::after {
+  content: '';
+  position: absolute; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247,162,120,0.14) 0%, transparent 70%);
+  bottom: -80px; right: -80px; pointer-events: none;
+}
 
-  .home-title .accent-tangerine { color: var(--tangerine); }
-  .home-title .accent-yellow { color: var(--yellow); }
+.home-overline {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--turquoise); opacity: 0.8;
+  margin-bottom: 1.75rem;
+  position: relative; z-index: 1;
+}
 
-  .home-subtitle-row {
-    display: flex; align-items: flex-end;
-    justify-content: space-between;
-    margin-top: 3rem;
-    flex-wrap: wrap; gap: 2rem;
-  }
+.home-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  line-height: 1.08; font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  max-width: 820px;
+  position: relative; z-index: 1;
+}
+.home-headline em { font-style: italic; color: var(--tangerine); }
 
-  .home-tagline {
-    font-size: 1.15rem;
-    font-weight: 300;
-    color: rgba(250,250,248,0.6);
-    max-width: 360px;
-    line-height: 1.65;
-    font-style: italic;
-  }
+.home-subtext {
+  font-size: 1.05rem; line-height: 1.8; font-weight: 300;
+  color: var(--muted); max-width: 520px;
+  margin: 0 auto 2.75rem;
+  position: relative; z-index: 1;
+}
 
-  .home-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.home-ctas {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
 
-  .btn {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.9rem 2rem;
-    border: 2px solid;
-    text-decoration: none;
-    transition: all 0.2s;
-    display: inline-block;
-    cursor: none;
-  }
-  .btn-primary {
-    background: var(--yellow);
-    border-color: var(--yellow);
-    color: var(--graphite);
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--yellow);
-  }
-  .btn-outline {
-    background: transparent;
-    border-color: var(--white);
-    color: var(--white);
-  }
-  .btn-outline:hover {
-    background: var(--white);
-    color: var(--graphite);
-  }
+/* scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; color: var(--muted); opacity: 0.45;
+  font-family: 'Space Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase;
+  z-index: 1;
+  animation: bob 2.5s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(4px)} }
+.scroll-hint::after { content: '↓'; font-size: 1rem; }
 
-  /* Marquee strip */
-  .marquee-strip {
-    background: var(--blue);
-    overflow: hidden;
-    padding: 0.75rem 0;
-    border-top: 3px solid var(--turquoise);
-    border-bottom: 3px solid var(--turquoise);
-  }
-  .marquee-inner {
-    display: flex; gap: 3rem;
-    white-space: nowrap;
-    animation: marquee 18s linear infinite;
-    width: max-content;
-  }
-  .marquee-inner span {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.12em;
-    color: var(--white);
-  }
-  .marquee-inner .dot {
-    color: var(--yellow);
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+/* Values section */
+.home-values {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--line);
+  background: var(--graphite-deep);
+}
+.value-item {
+  padding: 3rem 2.75rem;
+  border-right: 1px solid var(--line);
+  transition: background .25s;
+}
+.value-item:last-child { border-right: none; }
+.value-item:hover { background: rgba(255,255,255,.03); }
+.value-num {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  color: var(--turquoise); opacity: 0.7; display: block; margin-bottom: 1rem;
+  letter-spacing: 0.12em;
+}
+.value-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 600; margin-bottom: 0.6rem; color: var(--white);
+}
+.value-text { font-size: 0.88rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
 
-  /* Home stats bar */
-  .home-stats {
-    background: var(--tangerine);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 3px solid var(--graphite);
-  }
-  .stat-item {
-    padding: 2.5rem 3rem;
-    border-right: 2px solid var(--graphite);
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 4rem;
-    color: var(--graphite);
-    line-height: 1;
-    display: block;
-  }
-  .stat-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--graphite);
-    opacity: 0.7;
-    margin-top: 0.5rem;
-    display: block;
-  }
+/* Work teaser */
+.home-work-teaser {
+  padding: 6rem 2.75rem;
+  background: var(--graphite);
+  border-top: 1px solid var(--line);
+}
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--turquoise); opacity: 0.7;
+  display: block; margin-bottom: 1rem;
+}
+.home-work-teaser h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 600;
+  letter-spacing: -0.02em; margin-bottom: 0.5rem; color: var(--white);
+}
+.home-work-teaser h2 em { font-style: italic; color: var(--tangerine); }
+.home-work-teaser > p { font-size: 0.92rem; color: var(--muted); font-weight: 300; margin-bottom: 3rem; }
 
-  /* Services section */
-  .home-services {
-    background: var(--white);
-    padding: 6rem 3rem;
-  }
-  .section-header {
-    display: flex; align-items: center;
-    justify-content: space-between;
-    margin-bottom: 4rem;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 7vw, 6rem);
-    line-height: 1;
-    color: var(--graphite);
-    letter-spacing: 0.02em;
-  }
-  .section-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--blue);
-    letter-spacing: 0.15em;
-  }
+.teaser-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
+.teaser-card {
+  border-radius: 16px; overflow: hidden; cursor: none;
+  background: var(--subtle); border: 1px solid var(--line);
+  transition: transform .25s, border-color .25s;
+}
+.teaser-card:hover { transform: translateY(-4px); border-color: rgba(250,248,245,.2); }
+.teaser-thumb { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+.teaser-info { padding: 1rem 1.25rem; }
+.teaser-info span { font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 0.2rem; }
+.teaser-info strong { font-size: 0.92rem; color: var(--white); font-weight: 500; }
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 2px solid var(--graphite);
-  }
-  .service-card {
-    padding: 2.5rem;
-    border-right: 2px solid var(--graphite);
-    position: relative;
-    overflow: hidden;
-    transition: background 0.25s;
-  }
-  .service-card:last-child { border-right: none; }
-  .service-card:hover { background: var(--yellow); }
-  .service-card-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    color: var(--blue);
-    opacity: 0.18;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-  }
-  .service-card h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.05em;
-    color: var(--graphite);
-    margin-bottom: 0.75rem;
-  }
-  .service-card p {
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--graphite);
-    opacity: 0.7;
-  }
+/* CTA banner */
+.home-cta-banner {
+  padding: 6rem 2.75rem;
+  background: var(--graphite-deep);
+  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.home-cta-banner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem,4vw,3.2rem); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.15; color: var(--white);
+}
+.home-cta-banner h2 em { font-style: italic; color: var(--tangerine); }
+.home-cta-banner p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; font-weight: 300; margin-bottom: 1.75rem; max-width: 380px; }
 
-  /* ============ ABOUT PAGE ============ */
-  #about { background: var(--white); }
 
-  .about-hero {
-    background: var(--blue);
-    padding: 5rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    min-height: 70vh;
-  }
+/* ══════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════ */
+#about { background: var(--graphite-deep); }
 
-  .about-hero-text h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 10vw, 9rem);
-    line-height: 0.9;
-    color: var(--white);
-  }
-  .about-hero-text h1 em {
-    color: var(--yellow);
-    font-style: normal;
-    display: block;
-  }
+/* Full-screen intro */
+.about-hero {
+  min-height: calc(100vh - 68px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 4rem 2.75rem;
+  position: relative; overflow: hidden;
+}
+.about-hero::before {
+  content: '';
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(21,230,205,0.1) 0%, transparent 70%);
+  top: -150px; right: -150px; pointer-events: none;
+}
+.about-hero::after {
+  content: '';
+  position: absolute; width: 350px; height: 350px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(247,162,120,0.12) 0%, transparent 70%);
+  bottom: -80px; left: -80px; pointer-events: none;
+}
 
-  .about-hero-text p {
-    margin-top: 2rem;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.8);
-    font-weight: 300;
-    max-width: 420px;
-  }
+.about-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--turquoise); opacity: 0.75; margin-bottom: 1.75rem;
+  position: relative; z-index: 1;
+}
 
-  .about-visual {
-    position: relative;
-  }
+.about-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6.5vw, 5.5rem); font-weight: 600;
+  line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--white); margin-bottom: 1.5rem;
+  max-width: 760px;
+  position: relative; z-index: 1;
+}
+.about-hero h1 em { font-style: italic; color: var(--tangerine); }
 
-  .about-photo-frame {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--graphite);
-    position: relative;
-    overflow: hidden;
-    border: 4px solid var(--yellow);
-  }
+.about-hero-sub {
+  font-size: 1.05rem; line-height: 1.8; font-weight: 300;
+  color: var(--muted); max-width: 520px;
+  margin: 0 auto 2.75rem;
+  position: relative; z-index: 1;
+}
 
-  .about-photo-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 1rem;
-  }
+/* Photo + chips row */
+.about-cards-row {
+  display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 1;
+  margin-top: 1rem;
+}
+.about-photo-card {
+  width: 160px; height: 200px;
+  background: var(--graphite);
+  border-radius: 80px 80px 24px 24px;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.5rem;
+  overflow: hidden;
+}
+.about-initials {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; color: var(--tangerine); font-style: italic; line-height: 1;
+}
+.about-photo-hint { font-size: 0.65rem; color: var(--muted); opacity: 0.5; font-family: 'Space Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  .about-initials {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 8rem;
-    color: var(--tangerine);
-    line-height: 1;
-  }
+.about-chip-col {
+  display: flex; flex-direction: column; gap: 0.5rem; justify-content: center;
+}
+.about-chip {
+  font-size: 0.8rem; padding: 0.45rem 1.1rem; border-radius: 100px;
+  border: 1px solid var(--line); color: var(--muted);
+  background: var(--subtle);
+  white-space: nowrap;
+}
+.about-chip.pop { border-color: rgba(21,230,205,0.3); color: var(--turquoise); background: rgba(21,230,205,0.07); }
+.about-chip.pop2 { border-color: rgba(247,162,120,0.3); color: var(--tangerine); background: rgba(247,162,120,0.07); }
 
-  .about-photo-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(250,250,248,0.4);
-  }
+/* Story section */
+.about-section {
+  padding: 5.5rem 2.75rem;
+  display: grid; grid-template-columns: 220px 1fr; gap: 5rem;
+  align-items: start;
+  border-top: 1px solid var(--line);
+}
+.about-section-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-style: italic;
+  color: var(--tangerine); font-weight: 400;
+  position: sticky; top: 88px;
+}
+.about-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 600;
+  letter-spacing: -0.02em; margin-bottom: 1.25rem; color: var(--white);
+}
+.about-body p { font-size: 0.97rem; line-height: 1.85; color: var(--muted); font-weight: 300; margin-bottom: 1.25rem; }
 
-  .about-badge {
-    position: absolute;
-    bottom: -1.5rem; right: -1.5rem;
-    width: 110px; height: 110px;
-    background: var(--yellow);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    border: 3px solid var(--graphite);
-  }
-  .about-badge span:first-child {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--graphite);
-    line-height: 1;
-  }
-  .about-badge span:last-child {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--graphite);
-    text-align: center;
-  }
+.about-quote {
+  margin: 2.25rem 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 3px solid var(--tangerine);
+  background: var(--subtle); border-radius: 0 14px 14px 0;
+}
+.about-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-style: italic; line-height: 1.65;
+  opacity: 1; margin: 0; color: var(--white);
+}
 
-  /* About content */
-  .about-content {
-    padding: 6rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 6rem;
-    align-items: start;
-  }
+.approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+.approach-card {
+  padding: 1.5rem; background: var(--subtle); border-radius: 16px;
+  border: 1px solid var(--line); transition: border-color .2s;
+}
+.approach-card:hover { border-color: rgba(250,248,245,.2); }
+.approach-card-icon { font-size: 1.4rem; margin-bottom: 0.75rem; display: block; }
+.approach-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.4rem; color: var(--white); }
+.approach-card p { font-size: 0.85rem; line-height: 1.7; color: var(--muted); font-weight: 300; margin: 0; }
 
-  .about-sticky-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--tangerine);
-    position: sticky; top: 100px;
-  }
+/* Skills */
+.skills-section {
+  padding: 5.5rem 2.75rem;
+  background: var(--graphite);
+  border-top: 1px solid var(--line);
+}
+.skills-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); font-weight: 600; margin-bottom: 0.4rem; }
+.skills-section > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 3rem; font-weight: 300; }
+.skills-groups { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.skill-group { background: var(--subtle); border-radius: 16px; padding: 1.75rem; border: 1px solid var(--line); }
+.skill-group-label {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--turquoise); margin-bottom: 1.5rem; display: block;
+}
+.skill-item { margin-bottom: 1.1rem; }
+.skill-item:last-child { margin-bottom: 0; }
+.skill-row { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+.skill-name { font-size: 0.85rem; color: var(--white); font-weight: 400; }
+.skill-pct { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.6; }
+.skill-bar { height: 2px; background: var(--line); border-radius: 100px; }
+.skill-fill { height: 100%; border-radius: 100px; background: var(--turquoise); }
 
-  .about-body h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--graphite);
-    margin-bottom: 1.5rem;
-  }
-  .about-body p {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--graphite);
-    opacity: 0.75;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
+/* Resume */
+.resume-section {
+  padding: 5.5rem 2.75rem;
+  background: var(--graphite-deep);
+  border-top: 1px solid var(--line);
+}
+.resume-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+.resume-section > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 3rem; font-weight: 300; }
+.resume-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.resume-col-label {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--turquoise); display: block; margin-bottom: 1.75rem;
+}
+.resume-entry { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+.resume-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.resume-entry-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.3rem; flex-wrap: wrap; }
+.resume-entry-title { font-weight: 500; font-size: 0.95rem; color: var(--white); }
+.resume-entry-date { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.5; white-space: nowrap; }
+.resume-entry-org { font-size: 0.82rem; color: var(--blue); margin-bottom: 0.5rem; }
+.resume-entry-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+.resume-download {
+  margin-top: 3rem; display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 1.75rem; background: var(--subtle);
+  border-radius: 16px; border: 1px solid var(--line);
+}
+.resume-download-icon { font-size: 1.4rem; }
+.resume-download-text strong { display: block; font-size: 0.9rem; color: var(--white); }
+.resume-download-text span { font-size: 0.8rem; color: var(--muted); }
+.resume-download-btn { margin-left: auto; }
 
-  .skills-section {
-    background: var(--graphite);
-    padding: 5rem 3rem;
-  }
 
-  .skills-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--yellow);
-    margin-bottom: 3rem;
-  }
+/* ══════════════════════════════════
+   PORTFOLIO HUB
+══════════════════════════════════ */
+#portfolio { background: var(--graphite-deep); }
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
+.portfolio-hub-hero {
+  padding: 5rem 2.75rem 4rem;
+  border-bottom: 1px solid var(--line);
+}
+.portfolio-hub-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem,6vw,5rem); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.05;
+  color: var(--white); margin-bottom: 0.75rem;
+}
+.portfolio-hub-hero h1 em { font-style: italic; color: var(--tangerine); }
+.portfolio-hub-hero p { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-  .skill-tag {
-    background: transparent;
-    border: 1.5px solid rgba(255,255,255,0.15);
-    padding: 1rem 1.5rem;
-    transition: all 0.2s;
-  }
-  .skill-tag:hover {
-    border-color: var(--turquoise);
-    background: rgba(21,230,205,0.08);
-  }
-  .skill-tag-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  .skill-bar {
-    height: 2px;
-    background: rgba(255,255,255,0.1);
-    position: relative;
-  }
-  .skill-fill {
-    position: absolute; top: 0; left: 0; height: 100%;
-    background: var(--turquoise);
-  }
+.category-list { padding: 0.75rem 2.75rem 5rem; }
+.category-row {
+  display: grid; grid-template-columns: 64px 1fr auto 32px;
+  align-items: center; gap: 1.75rem;
+  padding: 1.5rem 1.25rem; border-radius: 14px;
+  cursor: none; transition: background .2s;
+  margin-bottom: 0.2rem;
+}
+.category-row:hover { background: var(--subtle); }
+.category-row:hover .cat-name { color: var(--turquoise); }
+.category-row:hover .cat-arrow { opacity: 1; transform: translateX(0); }
 
-  /* ============ PORTFOLIO PAGE ============ */
-  #portfolio { background: var(--white); }
+.cat-icon-box { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.cat-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.cat-name { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 600; letter-spacing: -0.01em; transition: color .2s; color: var(--white); }
+.cat-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+.cat-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+.cat-count { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.5; }
+.cat-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; justify-content: flex-end; }
+.cat-tag { font-size: 0.7rem; padding: 0.2rem 0.65rem; border-radius: 100px; background: var(--subtle); color: var(--muted); border: 1px solid var(--line); }
+.cat-arrow { font-size: 1rem; color: var(--turquoise); opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; }
 
-  .portfolio-hero {
-    background: var(--yellow);
-    padding: 5rem 3rem;
-    border-bottom: 3px solid var(--graphite);
-  }
-  .portfolio-hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 12vw, 11rem);
-    line-height: 0.88;
-    color: var(--graphite);
-    letter-spacing: -0.01em;
-  }
-  .portfolio-hero h1 em {
-    color: var(--blue);
-    font-style: normal;
-  }
 
-  .portfolio-filter {
-    background: var(--graphite);
-    padding: 1rem 3rem;
-    display: flex; gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-    border-bottom: 3px solid var(--tangerine);
-  }
+/* ══════════════════════════════════
+   SUBPAGES
+══════════════════════════════════ */
+.subpage-hero {
+  padding: 3.5rem 2.75rem 3rem;
+  border-bottom: 1px solid var(--line);
+}
+.subpage-back {
+  font-size: 0.82rem; color: var(--turquoise); background: none; border: none;
+  cursor: none; display: flex; align-items: center; gap: 0.4rem;
+  margin-bottom: 2rem; transition: opacity .15s;
+}
+.subpage-back:hover { opacity: 0.6; }
+.subpage-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.6rem; color: var(--white); }
+.subpage-hero p { font-size: 0.95rem; color: var(--muted); font-weight: 300; max-width: 500px; line-height: 1.7; }
+.subpage-body { padding: 3rem 2.75rem 5rem; }
 
-  .filter-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-right: 1rem;
-  }
+/* Project grids */
+.proj-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.proj-grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+.proj-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+.proj-grid-masonry { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
 
-  .filter-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    border: 1.5px solid rgba(255,255,255,0.2);
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    cursor: none;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--turquoise);
-    color: var(--turquoise);
-    background: rgba(21,230,205,0.1);
-  }
+/* Project card */
+.proj-card {
+  border-radius: 16px; overflow: hidden;
+  cursor: none; transition: transform .25s, box-shadow .25s;
+  background: var(--subtle); border: 1px solid var(--line);
+}
+.proj-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.3); border-color: rgba(250,248,245,.15); }
+.proj-thumb { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.proj-thumb.tall { aspect-ratio: 3/4; }
+.proj-thumb.wide { aspect-ratio: 16/7; }
+.proj-thumb.sq { aspect-ratio: 1/1; }
+.thumb-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,.3); }
+.thumb-inner.dark { color: rgba(60,55,68,.4); }
+.thumb-icon { font-size: 2.25rem; }
+.proj-info { padding: 1rem 1.25rem 1.25rem; background: transparent; }
+.proj-info-top { display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.3rem; }
+.proj-cat { font-size: 0.72rem; color: var(--turquoise); opacity: 0.8; }
+.proj-year { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); opacity: 0.45; }
+.proj-title { font-weight: 500; font-size: 0.93rem; color: var(--white); }
+.proj-hint { font-size: 0.72rem; color: var(--muted); opacity: 0.35; margin-top: 0.45rem; }
 
-  /* Category sections */
-  .category-section {
-    padding: 5rem 3rem;
-    border-bottom: 2px solid rgba(60,55,68,0.1);
-  }
-  .category-section:nth-child(odd) { background: var(--white); }
-  .category-section:nth-child(even) { background: #F5F4F0; }
+/* Code cards */
+.code-card { border-radius: 16px; border: 1px solid var(--line); padding: 1.75rem; background: var(--subtle); cursor: none; transition: transform .2s, border-color .2s; }
+.code-card:hover { transform: translateY(-4px); border-color: rgba(21,230,205,.25); }
+.code-lang { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--turquoise); margin-bottom: 0.75rem; display: block; }
+.code-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--white); margin-bottom: 0.65rem; }
+.code-desc { font-size: 0.85rem; line-height: 1.65; color: var(--muted); font-weight: 300; margin-bottom: 1.25rem; }
+.code-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.code-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px; border: 1px solid rgba(21,230,205,.2); color: var(--turquoise); }
 
-  .category-header {
-    display: flex; align-items: center; gap: 2rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-  }
-  .category-icon-box {
-    width: 56px; height: 56px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-  .category-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--graphite);
-    letter-spacing: 0.03em;
-    flex: 1;
-  }
-  .category-count {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--blue);
-    background: rgba(0,141,213,0.08);
-    border: 1.5px solid var(--blue);
-    padding: 0.4rem 0.9rem;
-  }
+/* Social cards */
+.social-card { border-radius: 14px; overflow: hidden; cursor: none; transition: transform .2s, border-color .2s; border: 1px solid var(--line); background: var(--subtle); }
+.social-card:hover { transform: translateY(-4px); border-color: rgba(250,248,245,.15); }
+.social-header { padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,.2); border-bottom: 1px solid var(--line); }
+.social-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.social-platform { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.social-thumb { display: flex; align-items: center; justify-content: center; }
+.social-label { padding: 0.6rem 1rem; font-size: 0.78rem; font-weight: 500; color: var(--white); }
 
-  /* Portfolio grids */
-  .portfolio-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .portfolio-grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  .portfolio-grid-masonry {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
 
-  .portfolio-card {
-    position: relative; overflow: hidden;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
-    cursor: none;
-  }
-  .portfolio-card:hover { border-color: var(--graphite); }
+/* ══════════════════════════════════
+   PROJECT DETAIL MODAL
+══════════════════════════════════ */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(20,18,25,.75);
+  backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center;
+  padding: 2rem;
+}
+.modal-backdrop.open { display: flex; }
 
-  .portfolio-card-thumb {
-    aspect-ratio: 4/3;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .portfolio-card-thumb.tall { aspect-ratio: 3/4; }
-  .portfolio-card-thumb.wide { aspect-ratio: 16/7; }
-  .portfolio-card-thumb.sq { aspect-ratio: 1/1; }
+.modal {
+  background: var(--graphite);
+  border: 1px solid rgba(250,248,245,.1);
+  border-radius: 24px;
+  width: 100%; max-width: 820px;
+  max-height: 88vh; overflow-y: auto;
+  position: relative;
+  animation: modalIn .3s ease both;
+}
+@keyframes modalIn { from { opacity:0; transform:scale(.96) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
 
-  .thumb-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.5rem;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.4);
-  }
-  .thumb-icon { font-size: 2.5rem; }
+.modal-close {
+  position: sticky; top: 1rem; float: right; margin: 1rem 1rem 0 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--subtle); border: 1px solid var(--line); cursor: none;
+  font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  color: var(--white); transition: background .15s; z-index: 10;
+}
+.modal-close:hover { background: rgba(250,248,245,.15); }
 
-  .portfolio-card-info {
-    padding: 1rem 1.25rem;
-    background: var(--white);
-    border-top: 2px solid var(--graphite);
-  }
-  .portfolio-card-cat {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.25rem;
-  }
-  .portfolio-card-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--graphite);
-  }
+.modal-hero {
+  aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+  margin: 0 1.5rem; border-radius: 16px; overflow: hidden; font-size: 5rem;
+}
+.modal-body { padding: 2rem 2.25rem 1.5rem; }
+.modal-meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.modal-cat { font-size: 0.78rem; color: var(--turquoise); }
+.modal-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
+.modal-year { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); opacity: 0.5; }
+.modal-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+.modal-desc { font-size: 0.97rem; line-height: 1.8; color: var(--muted); font-weight: 300; margin-bottom: 1.75rem; }
+.modal-tags-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); opacity: 0.5; margin-bottom: 0.6rem; display: block; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.modal-tag { font-size: 0.78rem; padding: 0.3rem 0.8rem; border-radius: 100px; background: var(--subtle); color: var(--white); border: 1px solid var(--line); }
 
-  /* Card overlay on hover */
-  .card-overlay {
-    position: absolute; inset: 0;
-    background: var(--blue);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .portfolio-card:hover .card-overlay { opacity: 0.92; }
-  .card-overlay-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.1em;
-    color: var(--white);
-    text-align: center;
-  }
-  .card-overlay-text small {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--turquoise);
-    margin-top: 0.25rem;
-    font-style: normal;
-  }
-
-  /* Code projects */
-  .code-card {
-    border: 2px solid var(--graphite);
-    padding: 2rem;
-    background: var(--graphite);
-    position: relative; overflow: hidden;
-    transition: all 0.2s;
-    cursor: none;
-  }
-  .code-card:hover { border-color: var(--turquoise); }
-  .code-card-lang {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--turquoise);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-  .code-card-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.7rem;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.03em;
-  }
-  .code-card-desc {
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: rgba(250,250,248,0.55);
-    font-weight: 300;
-    margin-bottom: 1.25rem;
-  }
-  .code-card-tags {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-  }
-  .code-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    padding: 0.25rem 0.6rem;
-    border: 1px solid rgba(21,230,205,0.3);
-    color: var(--turquoise);
-    text-transform: uppercase;
-  }
-  .code-card-corner {
-    position: absolute;
-    top: 1.25rem; right: 1.25rem;
-    font-size: 1.5rem;
-  }
-
-  /* Social media cards */
-  .social-card {
-    border: 2px solid var(--graphite);
-    overflow: hidden;
-    cursor: none;
-    transition: transform 0.2s;
-  }
-  .social-card:hover { transform: translateY(-4px); }
-  .social-card-header {
-    padding: 0.6rem 0.9rem;
-    display: flex; align-items: center; gap: 0.5rem;
-    border-bottom: 2px solid var(--graphite);
-  }
-  .social-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-  }
-  .social-platform {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  /* Footer */
-  footer {
-    background: var(--graphite);
-    padding: 4rem 3rem;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 2rem;
-    border-top: 4px solid var(--tangerine);
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--white);
-    letter-spacing: 0.04em;
-  }
-  .footer-logo span { color: var(--yellow); }
-  .footer-links {
-    display: flex; gap: 2rem; list-style: none; flex-wrap: wrap;
-  }
-  .footer-links a {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(250,250,248,0.45);
-    text-decoration: none;
-    transition: color 0.2s;
-    cursor: none;
-  }
-  .footer-links a:hover { color: var(--turquoise); }
-  .footer-copy {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(250,250,248,0.25);
-    letter-spacing: 0.1em;
-  }
-
-  /* Page transitions */
-  .page-enter { animation: fadeUp 0.4s ease both; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Accent lines */
-  .accent-line {
-    display: block; width: 60px; height: 4px;
-    margin-bottom: 1.5rem;
-  }
+.modal-photos { display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.5rem 2.25rem 2rem; scroll-snap-type: x mandatory; }
+.modal-photos::-webkit-scrollbar { height: 4px; }
+.modal-photos::-webkit-scrollbar-track { background: var(--line); border-radius: 100px; }
+.modal-photos::-webkit-scrollbar-thumb { background: var(--turquoise); border-radius: 100px; }
+.modal-photo { flex-shrink: 0; width: 200px; height: 140px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; scroll-snap-align: start; border: 1px solid var(--line); }
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo" onclick="showPage('home')">ALEX<span>.</span>DS</a>
+  <a class="nav-logo" href="#" onclick="return showPage('home')">alex<em>.</em></a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
-    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
-    <li><a href="#" onclick="showPage('portfolio')" id="nav-portfolio">Portfolio</a></li>
+    <li><a href="#" onclick="return showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="return showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="return showPage('portfolio')" id="nav-portfolio">Work</a></li>
   </ul>
 </nav>
 
-<!-- ===================== HOME PAGE ===================== -->
+<!-- BREADCRUMB -->
+<div class="breadcrumb" id="breadcrumb">
+  <button class="breadcrumb-back" onclick="closeSubpage()">← Work</button>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-label" id="breadcrumb-label"></span>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-hero" id="modal-hero"></div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="modal-cat" id="modal-cat"></span>
+        <span class="modal-dot"></span>
+        <span class="modal-year" id="modal-year"></span>
+      </div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <span class="modal-tags-label">Made with</span>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+    <div class="modal-photos" id="modal-photos"></div>
+  </div>
+</div>
+
+
+<!-- ══ HOME ══ -->
 <div id="home" class="page active">
 
   <section class="home-hero">
-    <!-- BG decorative elements -->
-    <div style="position:absolute;top:2rem;right:3rem;font-family:'Bebas Neue',sans-serif;font-size:10rem;color:rgba(237,240,96,0.04);line-height:1;user-select:none;pointer-events:none;">DESIGN</div>
-    <div style="position:absolute;bottom:8rem;right:3rem;width:200px;height:200px;border:3px solid rgba(21,230,205,0.12);border-radius:50%;pointer-events:none;"></div>
-    <div style="position:absolute;bottom:6rem;right:5rem;width:120px;height:120px;border:3px solid rgba(247,162,120,0.15);pointer-events:none;"></div>
-
-    <div class="home-eyebrow">Creative Designer</div>
-
-    <h1 class="home-title">
-      <span>MAKE</span><br>
-      <span class="accent-tangerine">IT</span><br>
-      <span class="accent-yellow">LOUD.</span>
+    <span class="home-overline">Human-centered design</span>
+    <h1 class="home-headline">
+      Solving <em>real problems</em><br>for real people.
     </h1>
-
-    <div class="home-subtitle-row">
-      <p class="home-tagline">Bold ideas, precise execution. Designing for brands that refuse to be ignored.</p>
-      <div class="home-cta-group">
-        <a href="#" class="btn btn-primary" onclick="showPage('portfolio')">View Work</a>
-        <a href="#" class="btn btn-outline" onclick="showPage('about')">About Me</a>
-      </div>
+    <p class="home-subtext">
+      I'm Alex — a designer who starts with empathy and ends with something that actually works. I love finding creative, elegant solutions to things that genuinely matter to people.
+    </p>
+    <div class="home-ctas">
+      <a href="#" class="btn btn-teal" onclick="return showPage('portfolio')">See my work</a>
+      <a href="#" class="btn btn-ghost" onclick="return showPage('about')">About me</a>
     </div>
+    <div class="scroll-hint">scroll</div>
   </section>
 
-  <!-- Marquee -->
-  <div class="marquee-strip">
-    <div class="marquee-inner">
-      <span>3D Modeling</span><span class="dot">✦</span>
-      <span>Brand Identity</span><span class="dot">✦</span>
-      <span>Motion Graphics</span><span class="dot">✦</span>
-      <span>Product Design</span><span class="dot">✦</span>
-      <span>Illustration</span><span class="dot">✦</span>
-      <span>UI/UX Design</span><span class="dot">✦</span>
-      <span>Social Media</span><span class="dot">✦</span>
-      <span>3D Modeling</span><span class="dot">✦</span>
-      <span>Brand Identity</span><span class="dot">✦</span>
-      <span>Motion Graphics</span><span class="dot">✦</span>
-      <span>Product Design</span><span class="dot">✦</span>
-      <span>Illustration</span><span class="dot">✦</span>
-      <span>UI/UX Design</span><span class="dot">✦</span>
-      <span>Social Media</span><span class="dot">✦</span>
+  <div class="home-values">
+    <div class="value-item">
+      <span class="value-num">01</span>
+      <div class="value-title">Start with people</div>
+      <p class="value-text">Every great design starts with genuine curiosity about the humans it's built for. I ask a lot of questions before I pick up a pencil.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-num">02</span>
+      <div class="value-title">Solve with elegance</div>
+      <p class="value-text">Good solutions feel inevitable in hindsight. I'm always looking for the answer that's both clever and simple — the one that makes you wonder why it wasn't done that way before.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-num">03</span>
+      <div class="value-title">Keep it fun</div>
+      <p class="value-text">Life's too short for boring design. I like work that has a little spark — something that makes you smile when you notice it.</p>
     </div>
   </div>
 
-  <!-- Stats bar -->
-  <div class="home-stats">
-    <div class="stat-item">
-      <span class="stat-number">50+</span>
-      <span class="stat-label">Projects Completed</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">6</span>
-      <span class="stat-label">Years of Experience</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">30+</span>
-      <span class="stat-label">Happy Clients</span>
-    </div>
-  </div>
-
-  <!-- Services -->
-  <section class="home-services">
-    <div class="section-header">
-      <h2 class="section-title">WHAT<br>I DO</h2>
-      <span class="section-num">// SERVICES</span>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-card-num">01</div>
-        <h3>Brand & Identity</h3>
-        <p>From logo systems to full brand guidelines, I craft identities that are bold, memorable, and built to last.</p>
+  <section class="home-work-teaser">
+    <span class="section-label">Selected work</span>
+    <h2>A taste of <em>the work</em></h2>
+    <p>Spanning 3D, product, illustration, graphics, and more.</p>
+    <div class="teaser-grid">
+      <div class="teaser-card" onclick="showPage('portfolio')">
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD);">⬡</div>
+        <div class="teaser-info"><span>3D / Blender</span><strong>Chrome Vessel Series</strong></div>
       </div>
-      <div class="service-card">
-        <div class="service-card-num">02</div>
-        <h3>3D & Product Design</h3>
-        <p>Bringing ideas into three dimensions — product renders, packaging, and sculptural visual concepts.</p>
+      <div class="teaser-card" onclick="showPage('portfolio')">
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744);">▣</div>
+        <div class="teaser-info"><span>Product Design</span><strong>Canister Series</strong></div>
       </div>
-      <div class="service-card">
-        <div class="service-card-num">03</div>
-        <h3>Digital & Social</h3>
-        <p>Content that stops the scroll. Motion graphics, social assets, and digital campaigns with personality.</p>
+      <div class="teaser-card" onclick="showPage('portfolio')">
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730);">◈</div>
+        <div class="teaser-info"><span>Brand Identity</span><strong>Nova Brand System</strong></div>
       </div>
     </div>
+    <a href="#" class="btn btn-light" onclick="return showPage('portfolio')">View all work</a>
   </section>
 
-  <!-- CTA Banner -->
-  <div style="background: var(--turquoise); padding: 5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; border-top: 3px solid var(--graphite); border-bottom: 3px solid var(--graphite);">
-    <h2 style="font-family:'Bebas Neue',sans-serif; font-size: clamp(3rem, 7vw, 6rem); color: var(--graphite); line-height: 0.9;">GOT A<br>PROJECT?</h2>
+  <div class="home-cta-banner">
     <div>
-      <p style="font-size: 1rem; line-height: 1.7; color: var(--graphite); opacity: 0.7; max-width: 360px; margin-bottom: 2rem; font-weight: 300;">Let's build something that makes people stop and stare. I'm currently open for new projects.</p>
-      <a href="mailto:hello@alexdesign.com" class="btn" style="background: var(--graphite); border-color: var(--graphite); color: var(--white);">Get In Touch</a>
+      <h2>Got a project<br><em>in mind?</em></h2>
+    </div>
+    <div>
+      <p>I'm always excited to work on problems that matter to people. Whether it's a brand, a product, or something you can't quite name yet — let's figure it out together.</p>
+      <a href="mailto:hello@alexdesign.com" class="btn btn-teal">Say hello</a>
     </div>
   </div>
 
   <footer>
-    <div class="footer-logo">ALEX<span>.</span>DS</div>
+    <div class="footer-logo">alex<em>.</em></div>
     <ul class="footer-links">
-      <li><a href="#" onclick="showPage('home')">Home</a></li>
-      <li><a href="#" onclick="showPage('about')">About</a></li>
-      <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+      <li><a href="#" onclick="return showPage('home')">Home</a></li>
+      <li><a href="#" onclick="return showPage('about')">About</a></li>
+      <li><a href="#" onclick="return showPage('portfolio')">Work</a></li>
       <li><a href="mailto:hello@alexdesign.com">Contact</a></li>
     </ul>
-    <span class="footer-copy">© 2026 Alex Design. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Alex. All rights reserved.</span>
   </footer>
 </div>
 
-<!-- ===================== ABOUT PAGE ===================== -->
+
+<!-- ══ ABOUT ══ -->
 <div id="about" class="page">
 
   <section class="about-hero">
-    <div class="about-hero-text">
-      <h1>I AM<br><em>ALEX.</em></h1>
-      <p>A multi-disciplinary designer obsessed with bold visuals, unexpected color, and work that feels alive. I don't do safe — I do striking.</p>
-      <div style="margin-top: 2rem;">
-        <a href="#" class="btn" style="background: var(--yellow); border-color: var(--yellow); color: var(--graphite);" onclick="showPage('portfolio')">See My Work</a>
+    <span class="about-eyebrow">// About me</span>
+    <h1>Hi — I'm <em>Alex.</em><br>I design for people.</h1>
+    <p class="about-hero-sub">
+      A human-centered designer who gets genuinely excited about other people's problems. I'm early in my career and learning fast — with a curiosity that doesn't quit and a love for design that's thoughtful, innovative, and a little bit fun.
+    </p>
+    <div class="about-cards-row">
+      <div class="about-photo-card">
+        <span class="about-initials">AD</span>
+        <span class="about-photo-hint">your photo</span>
       </div>
-    </div>
-    <div class="about-visual">
-      <div class="about-photo-frame">
-        <div class="about-photo-placeholder">
-          <span class="about-initials">AD</span>
-          <span class="about-photo-label">Your photo here</span>
-        </div>
-      </div>
-      <div class="about-badge">
-        <span>6+</span>
-        <span>Years<br>Active</span>
+      <div class="about-chip-col">
+        <span class="about-chip pop">Human-centered design</span>
+        <span class="about-chip pop2">3D & product</span>
+        <span class="about-chip">Visual design</span>
+        <span class="about-chip">Illustration</span>
+        <span class="about-chip pop">Code & interaction</span>
       </div>
     </div>
   </section>
 
-  <section class="about-content">
-    <div class="about-sticky-label">MY<br>STORY</div>
+  <div class="about-section">
+    <div class="about-section-label">My story</div>
     <div class="about-body">
-      <h2>Design That Refuses to Whisper</h2>
-      <p>I'm a designer who believes every surface is a canvas and every project is a chance to say something real. With a background spanning 3D modeling, brand identity, illustration, and digital content, I bring a full-spectrum approach to creative challenges.</p>
-      <p>My work is rooted in the belief that great design doesn't just communicate — it commands attention. Whether I'm building a brand system from scratch or crafting a single social asset, I bring the same obsessive attention to craft, color, and concept.</p>
-      <p>Based wherever the work takes me, I collaborate with brands, studios, and founders who want their visual presence to hit hard and stick around.</p>
-
-      <div style="margin-top: 3rem; padding: 2rem; background: var(--yellow); border-left: 5px solid var(--graphite);">
-        <p style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--graphite); opacity: 1; line-height: 1.4; margin: 0;">"Design is not decoration. It's the difference between being seen and being forgotten."</p>
+      <h2>Design that starts with humans</h2>
+      <p>I believe that the best design is invisible — it just works, and it feels right. Getting there takes understanding people: their frustrations, their habits, what makes them smile. That's where I like to start, every time.</p>
+      <p>My toolkit spans visual design, 3D modeling, illustration, product thinking, and a bit of code. I like the breadth — it means I can find solutions in unexpected places and bring a cross-disciplinary eye to every brief.</p>
+      <div class="about-quote">
+        <p>"Design is not about making things pretty. It's about making things work beautifully for the people who use them."</p>
       </div>
-
-      <div style="margin-top: 3rem;">
-        <h2>Approach</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
-          <div style="border-top: 3px solid var(--tangerine); padding-top: 1rem;">
-            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--graphite); margin-bottom: 0.5rem;">Concept First</h3>
-            <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.65;">Every project starts with a clear idea. The visual language follows the thinking, not the other way around.</p>
-          </div>
-          <div style="border-top: 3px solid var(--blue); padding-top: 1rem;">
-            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--graphite); margin-bottom: 0.5rem;">Bold Execution</h3>
-            <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.65;">Once the direction is locked, I commit fully. No half-measures — every detail is intentional.</p>
-          </div>
-          <div style="border-top: 3px solid var(--turquoise); padding-top: 1rem;">
-            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--graphite); margin-bottom: 0.5rem;">Always Iterating</h3>
-            <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.65;">I bring clients into the process early and often. The best work is a conversation, not a reveal.</p>
-          </div>
-          <div style="border-top: 3px solid var(--yellow); padding-top: 1rem;">
-            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--graphite); margin-bottom: 0.5rem;">Cross-disciplinary</h3>
-            <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.65;">From 3D to code, brand to illustration — I move fluidly across media to serve the idea.</p>
-          </div>
+      <div class="approach-grid">
+        <div class="approach-card">
+          <span class="approach-card-icon">🔍</span>
+          <h3>Curious first</h3>
+          <p>I spend a lot of time in the question phase. The more I understand the problem, the better the answer.</p>
+        </div>
+        <div class="approach-card">
+          <span class="approach-card-icon">✦</span>
+          <h3>Elegant solutions</h3>
+          <p>I'm drawn to answers that feel simple — where the complexity is hidden beneath a clean surface.</p>
+        </div>
+        <div class="approach-card">
+          <span class="approach-card-icon">🔄</span>
+          <h3>Iterate openly</h3>
+          <p>My best work comes from feedback loops, not solo sprints. I share early and often.</p>
+        </div>
+        <div class="approach-card">
+          <span class="approach-card-icon">🎨</span>
+          <h3>A little delight</h3>
+          <p>Every project gets at least one moment of joy built in — because why not?</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Skills -->
   <section class="skills-section">
-    <h2 class="skills-title">// SKILLS & TOOLS</h2>
-    <div class="skills-grid">
-      <div class="skill-tag">
-        <span class="skill-tag-name">Blender / 3D</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+    <h2>Skills & tools</h2>
+    <p>What I work with day-to-day — always adding more.</p>
+    <div class="skills-groups">
+      <div class="skill-group">
+        <span class="skill-group-label">Design</span>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Figma</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Adobe Illustrator</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Adobe Photoshop</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Brand Identity</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
       </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Adobe Creative Suite</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      <div class="skill-group">
+        <span class="skill-group-label">3D & Motion</span>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Blender</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Fusion 360</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Motion Design</span><span class="skill-pct">60%</span></div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Product Rendering</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
       </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Figma / UI Design</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-      </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Brand Identity</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-      </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Motion Design</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
-      </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Illustration</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-      </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">HTML / CSS / JS</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
-      </div>
-      <div class="skill-tag">
-        <span class="skill-tag-name">Product Rendering</span>
-        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      <div class="skill-group">
+        <span class="skill-group-label">Code & Tools</span>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">HTML / CSS / JS</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">VS Code</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">GitHub</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span class="skill-name">Illustration</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
       </div>
     </div>
   </section>
 
+  <section class="resume-section">
+    <h2>Experience & Education</h2>
+    <p>Where I've been and what I've been learning along the way.</p>
+    <div class="resume-cols">
+      <div>
+        <span class="resume-col-label">Experience</span>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">Freelance Designer</span><span class="resume-entry-date">2023 – Present</span></div>
+          <div class="resume-entry-org">Self-employed</div>
+          <p class="resume-entry-desc">Working with small businesses and individuals on brand identity, social media content, and product design. Developing a process that centers real user needs from day one.</p>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">Design Intern</span><span class="resume-entry-date">Summer 2022</span></div>
+          <div class="resume-entry-org">Placeholder Studio · Portland, OR</div>
+          <p class="resume-entry-desc">Supported the creative team on branding projects, social content, and pitch decks. Got my first taste of real client feedback — loved it.</p>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">Visual Design Assistant</span><span class="resume-entry-date">2021 – 2022</span></div>
+          <div class="resume-entry-org">Campus Media · University</div>
+          <p class="resume-entry-desc">Created graphics, event posters, and social media content for campus publications. Honed my eye for layout and typography under deadline pressure.</p>
+        </div>
+      </div>
+      <div>
+        <span class="resume-col-label">Education</span>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">B.A. Design Studies</span><span class="resume-entry-date">2020 – 2024</span></div>
+          <div class="resume-entry-org">Placeholder University</div>
+          <p class="resume-entry-desc">Focused on human-centered design, visual communication, and design research methods. Senior thesis explored accessible packaging design for low-vision users.</p>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">3D Design Certification</span><span class="resume-entry-date">2023</span></div>
+          <div class="resume-entry-org">Online / Blender & Fusion 360</div>
+          <p class="resume-entry-desc">Completed intensive self-directed coursework in 3D modeling, product visualization, and rendering. Ongoing through personal projects.</p>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header"><span class="resume-entry-title">Web Development Basics</span><span class="resume-entry-date">2022</span></div>
+          <div class="resume-entry-org">freeCodeCamp / The Odin Project</div>
+          <p class="resume-entry-desc">Self-taught HTML, CSS, and JavaScript foundations to better collaborate with developers and build interactive pieces.</p>
+        </div>
+      </div>
+    </div>
+    <div class="resume-download">
+      <span class="resume-download-icon">📄</span>
+      <div class="resume-download-text"><strong>Full résumé</strong><span>PDF · Updated 2026</span></div>
+      <a href="#" class="btn btn-ghost resume-download-btn" style="padding:.55rem 1.25rem;font-size:.8rem;">Download</a>
+    </div>
+  </section>
+
   <footer>
-    <div class="footer-logo">ALEX<span>.</span>DS</div>
+    <div class="footer-logo">alex<em>.</em></div>
     <ul class="footer-links">
-      <li><a href="#" onclick="showPage('home')">Home</a></li>
-      <li><a href="#" onclick="showPage('about')">About</a></li>
-      <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+      <li><a href="#" onclick="return showPage('home')">Home</a></li>
+      <li><a href="#" onclick="return showPage('about')">About</a></li>
+      <li><a href="#" onclick="return showPage('portfolio')">Work</a></li>
       <li><a href="mailto:hello@alexdesign.com">Contact</a></li>
     </ul>
-    <span class="footer-copy">© 2026 Alex Design. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Alex. All rights reserved.</span>
   </footer>
 </div>
 
-<!-- ===================== PORTFOLIO PAGE ===================== -->
+
+<!-- ══ PORTFOLIO HUB ══ -->
 <div id="portfolio" class="page">
-
-  <div class="portfolio-hero">
-    <h1>THE<br><em>WORK</em></h1>
+  <div class="portfolio-hub-hero">
+    <h1>My <em>work</em></h1>
+    <p>A growing collection across six disciplines. Pick a category to explore.</p>
   </div>
-
-  <!-- Filter bar -->
-  <div class="portfolio-filter">
-    <span class="filter-label">Filter:</span>
-    <button class="filter-btn active" onclick="filterPortfolio('all', this)">All</button>
-    <button class="filter-btn" onclick="filterPortfolio('3d', this)">3D Models</button>
-    <button class="filter-btn" onclick="filterPortfolio('product', this)">Products</button>
-    <button class="filter-btn" onclick="filterPortfolio('artwork', this)">Artwork</button>
-    <button class="filter-btn" onclick="filterPortfolio('graphics', this)">Visual Graphics</button>
-    <button class="filter-btn" onclick="filterPortfolio('social', this)">Social Media</button>
-    <button class="filter-btn" onclick="filterPortfolio('code', this)">Code Projects</button>
+  <div class="category-list">
+    <div class="category-row" onclick="openSubpage('sub-3d')">
+      <div class="cat-icon-box" style="background:rgba(0,141,213,.12);">⬡</div>
+      <div class="cat-info"><span class="cat-name">3D Models</span><span class="cat-desc">Renders, sculpts, and environments in Blender and Fusion 360</span></div>
+      <div class="cat-meta"><span class="cat-count">6 projects</span><div class="cat-tags"><span class="cat-tag">Blender</span><span class="cat-tag">Fusion 360</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
+    <div class="category-row" onclick="openSubpage('sub-product')">
+      <div class="cat-icon-box" style="background:rgba(247,162,120,.12);">▣</div>
+      <div class="cat-info"><span class="cat-name">Products</span><span class="cat-desc">Packaging, objects, apparel, and concept product design</span></div>
+      <div class="cat-meta"><span class="cat-count">4 projects</span><div class="cat-tags"><span class="cat-tag">Packaging</span><span class="cat-tag">Concept</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
+    <div class="category-row" onclick="openSubpage('sub-artwork')">
+      <div class="cat-icon-box" style="background:rgba(21,230,205,.1);">✦</div>
+      <div class="cat-info"><span class="cat-name">Artwork</span><span class="cat-desc">Illustration, digital painting, mixed media, and print</span></div>
+      <div class="cat-meta"><span class="cat-count">6 works</span><div class="cat-tags"><span class="cat-tag">Illustration</span><span class="cat-tag">Print</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
+    <div class="category-row" onclick="openSubpage('sub-graphics')">
+      <div class="cat-icon-box" style="background:rgba(247,162,120,.08);">◈</div>
+      <div class="cat-info"><span class="cat-name">Visual Graphics</span><span class="cat-desc">Brand identities, logo systems, typography, and motion</span></div>
+      <div class="cat-meta"><span class="cat-count">5 projects</span><div class="cat-tags"><span class="cat-tag">Branding</span><span class="cat-tag">Motion</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
+    <div class="category-row" onclick="openSubpage('sub-social')">
+      <div class="cat-icon-box" style="background:rgba(0,141,213,.08);">⊕</div>
+      <div class="cat-info"><span class="cat-name">Social Media</span><span class="cat-desc">Campaign content, posts, reels, and platform-native design</span></div>
+      <div class="cat-meta"><span class="cat-count">8 campaigns</span><div class="cat-tags"><span class="cat-tag">Instagram</span><span class="cat-tag">YouTube</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
+    <div class="category-row" onclick="openSubpage('sub-code')">
+      <div class="cat-icon-box" style="background:rgba(21,230,205,.08);font-family:'Space Mono',monospace;font-size:.85rem;color:var(--turquoise);">{ }</div>
+      <div class="cat-info"><span class="cat-name">Code Projects</span><span class="cat-desc">Design systems, interactive builds, and generative tools</span></div>
+      <div class="cat-meta"><span class="cat-count">4 projects</span><div class="cat-tags"><span class="cat-tag">React</span><span class="cat-tag">Three.js</span></div></div>
+      <span class="cat-arrow">→</span>
+    </div>
   </div>
-
-  <!-- 3D Models -->
-  <section class="category-section" data-cat="3d">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--blue); color: var(--white); font-size: 1.4rem;">⬡</div>
-      <h2 class="category-title">3D MODELS</h2>
-      <span class="category-count">6 Projects</span>
-    </div>
-    <div class="portfolio-grid-3">
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #1a1a2e 0%, #3C3744 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">⬡</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">CHROME VESSEL<small>Blender · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Blender</span>
-          <div class="portfolio-card-title">Chrome Vessel Series</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #008DD5 0%, #15E6CD 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◈</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">ABSTRACT FORM<small>Blender · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Abstract</span>
-          <div class="portfolio-card-title">Liquid Glass Form</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #3C3744 0%, #F7A278 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◉</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">OBJECT STUDY<small>Blender · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Product</span>
-          <div class="portfolio-card-title">Organic Object Study</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #EDF060 0%, #F7A278 100%);">
-          <div class="thumb-placeholder" style="color: rgba(60,55,68,0.4);">
-            <span class="thumb-icon">⟡</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">SCULPTURAL TYPE<small>Blender · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Typography</span>
-          <div class="portfolio-card-title">Sculptural Typography</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #15E6CD 0%, #008DD5 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◈</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">ENVIRONMENT<small>Blender · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Environment</span>
-          <div class="portfolio-card-title">Minimal Scene Study</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #3C3744 0%, #008DD5 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">⬡</span>
-            <span>3D Render</span>
-          </div>
-          <div class="card-overlay">
-            <div class="card-overlay-text">CHARACTER<small>Blender · 2023</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--blue);">3D / Character</span>
-          <div class="portfolio-card-title">Abstract Figure</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section class="category-section" data-cat="product">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--tangerine); color: var(--graphite); font-size: 1.4rem;">▣</div>
-      <h2 class="category-title">PRODUCTS</h2>
-      <span class="category-count">4 Projects</span>
-    </div>
-    <div class="portfolio-grid-2">
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb wide" style="background: var(--graphite);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">▣</span>
-            <span>Product Design</span>
-          </div>
-          <div class="card-overlay" style="background: var(--tangerine);">
-            <div class="card-overlay-text" style="color: var(--graphite);">CANISTER SERIES<small style="color: var(--graphite); opacity: 0.6;">Product + Packaging · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--tangerine);">Product / Packaging</span>
-          <div class="portfolio-card-title">Canister Series — Homeware Brand</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb wide" style="background: linear-gradient(135deg, #F7A278 0%, #EDF060 100%);">
-          <div class="thumb-placeholder" style="color: rgba(60,55,68,0.5);">
-            <span class="thumb-icon">◎</span>
-            <span>Product Design</span>
-          </div>
-          <div class="card-overlay" style="background: var(--tangerine);">
-            <div class="card-overlay-text" style="color: var(--graphite);">SNEAKER COLLAB<small style="color: var(--graphite); opacity: 0.6;">Product Concept · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--tangerine);">Product / Concept</span>
-          <div class="portfolio-card-title">Sneaker Collaboration Concept</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb wide" style="background: linear-gradient(135deg, #008DD5 0%, #3C3744 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">▦</span>
-            <span>Product Design</span>
-          </div>
-          <div class="card-overlay" style="background: var(--tangerine);">
-            <div class="card-overlay-text" style="color: var(--graphite);">DESK OBJECTS<small style="color: var(--graphite); opacity: 0.6;">Product Design · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--tangerine);">Product / Objects</span>
-          <div class="portfolio-card-title">Minimal Desk Object Collection</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb wide" style="background: linear-gradient(135deg, #15E6CD 0%, #3C3744 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◈</span>
-            <span>Product Design</span>
-          </div>
-          <div class="card-overlay" style="background: var(--tangerine);">
-            <div class="card-overlay-text" style="color: var(--graphite);">APPAREL LINE<small style="color: var(--graphite); opacity: 0.6;">Apparel · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: var(--tangerine);">Product / Apparel</span>
-          <div class="portfolio-card-title">Capsule Apparel Line</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Artwork -->
-  <section class="category-section" data-cat="artwork">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--yellow); color: var(--graphite); font-size: 1.4rem;">✦</div>
-      <h2 class="category-title">ARTWORK</h2>
-      <span class="category-count">6 Works</span>
-    </div>
-    <div class="portfolio-grid-masonry">
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb tall" style="background: linear-gradient(180deg, #EDF060 0%, #F7A278 100%);">
-          <div class="thumb-placeholder" style="color: rgba(60,55,68,0.4);">
-            <span class="thumb-icon">✦</span><span>Illustration</span>
-          </div>
-          <div class="card-overlay" style="background: var(--yellow);">
-            <div class="card-overlay-text" style="color: var(--graphite);">FLORA NO. 1<small style="color: var(--graphite); opacity:0.6;">Illustration · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #9a8f00;">Illustration</span>
-          <div class="portfolio-card-title">Flora No. 1</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb sq" style="background: linear-gradient(135deg, #3C3744 0%, #15E6CD 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◎</span><span>Digital Art</span>
-          </div>
-          <div class="card-overlay" style="background: var(--yellow);">
-            <div class="card-overlay-text" style="color: var(--graphite);">GLITCH STUDY<small style="color: var(--graphite); opacity:0.6;">Digital Art · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #9a8f00;">Digital Art</span>
-          <div class="portfolio-card-title">Glitch Study 03</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb tall" style="background: linear-gradient(180deg, #008DD5 0%, #3C3744 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">⬡</span><span>Painting</span>
-          </div>
-          <div class="card-overlay" style="background: var(--yellow);">
-            <div class="card-overlay-text" style="color: var(--graphite);">FIGURE<small style="color: var(--graphite); opacity:0.6;">Mixed Media · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #9a8f00;">Mixed Media</span>
-          <div class="portfolio-card-title">Figure in Blue</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb sq" style="background: linear-gradient(135deg, #F7A278 0%, #3C3744 100%);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">✦</span><span>Print</span>
-          </div>
-          <div class="card-overlay" style="background: var(--yellow);">
-            <div class="card-overlay-text" style="color: var(--graphite);">POSTER<small style="color: var(--graphite); opacity:0.6;">Print Art · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #9a8f00;">Print</span>
-          <div class="portfolio-card-title">Manifesto Poster</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Visual Graphics -->
-  <section class="category-section" data-cat="graphics">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--turquoise); color: var(--graphite); font-size: 1.4rem;">◈</div>
-      <h2 class="category-title">VISUAL GRAPHICS</h2>
-      <span class="category-count">5 Projects</span>
-    </div>
-    <div class="portfolio-grid-3">
-      <div class="portfolio-card" style="grid-column: span 2;">
-        <div class="portfolio-card-thumb wide" style="background: var(--graphite);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◈</span><span>Brand Identity</span>
-          </div>
-          <div class="card-overlay" style="background: var(--turquoise);">
-            <div class="card-overlay-text" style="color: var(--graphite);">NOVA BRAND SYSTEM<small style="color: var(--graphite); opacity:0.6;">Brand Identity · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #0a9e8f;">Brand Identity</span>
-          <div class="portfolio-card-title">Nova — Complete Brand System</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #15E6CD 0%, #008DD5 100%);">
-          <div class="thumb-placeholder" style="color: rgba(255,255,255,0.6);">
-            <span class="thumb-icon">◎</span><span>Logo Design</span>
-          </div>
-          <div class="card-overlay" style="background: var(--turquoise);">
-            <div class="card-overlay-text" style="color: var(--graphite);">LOGO SET<small style="color: var(--graphite); opacity:0.6;">Logos · 2025</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #0a9e8f;">Logo Design</span>
-          <div class="portfolio-card-title">Logo Collection 2025</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #EDF060 0%, #15E6CD 100%);">
-          <div class="thumb-placeholder" style="color: rgba(60,55,68,0.4);">
-            <span class="thumb-icon">▦</span><span>Typography</span>
-          </div>
-          <div class="card-overlay" style="background: var(--turquoise);">
-            <div class="card-overlay-text" style="color: var(--graphite);">TYPE POSTER<small style="color: var(--graphite); opacity:0.6;">Typography · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #0a9e8f;">Typography</span>
-          <div class="portfolio-card-title">Expressive Type Poster</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: linear-gradient(135deg, #F7A278 0%, #EDF060 100%);">
-          <div class="thumb-placeholder" style="color: rgba(60,55,68,0.4);">
-            <span class="thumb-icon">⬡</span><span>Infographic</span>
-          </div>
-          <div class="card-overlay" style="background: var(--turquoise);">
-            <div class="card-overlay-text" style="color: var(--graphite);">DATA VIZ<small style="color: var(--graphite); opacity:0.6;">Data Design · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #0a9e8f;">Data Visualization</span>
-          <div class="portfolio-card-title">Annual Report Infographics</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-card-thumb" style="background: var(--blue);">
-          <div class="thumb-placeholder">
-            <span class="thumb-icon">◈</span><span>Motion</span>
-          </div>
-          <div class="card-overlay" style="background: var(--turquoise);">
-            <div class="card-overlay-text" style="color: var(--graphite);">MOTION GFX<small style="color: var(--graphite); opacity:0.6;">Motion · 2024</small></div>
-          </div>
-        </div>
-        <div class="portfolio-card-info">
-          <span class="portfolio-card-cat" style="color: #0a9e8f;">Motion Graphics</span>
-          <div class="portfolio-card-title">Brand Animation Loop</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Social Media -->
-  <section class="category-section" data-cat="social">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--tangerine); color: var(--graphite); font-size: 1.4rem;">⊕</div>
-      <h2 class="category-title">SOCIAL MEDIA</h2>
-      <span class="category-count">8 Campaigns</span>
-    </div>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-      <!-- IG post mockups -->
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#E1306C;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Instagram</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: linear-gradient(135deg, #F7A278, #EDF060); display:flex; align-items:center; justify-content:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--graphite); opacity:0.3;">POST</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Summer Campaign '25</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#E1306C;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Instagram</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: linear-gradient(135deg, #008DD5, #15E6CD); display:flex; align-items:center; justify-content:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:2rem; color:rgba(255,255,255,0.3);">POST</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Tech Brand Launch</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#1DA1F2;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Twitter/X</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: var(--graphite); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem; padding:1rem;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:var(--yellow); text-align:center; line-height:1.2;">"DESIGN IS<br>COMMUNICATION."</span>
-          <span style="font-size:0.6rem; font-family:'Space Mono',monospace; color:rgba(250,250,248,0.4); letter-spacing:0.1em; text-transform:uppercase;">@alexdesign</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Quote Series</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#E1306C;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Instagram</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: linear-gradient(135deg, #3C3744, #F7A278); display:flex; align-items:center; justify-content:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:2rem; color:rgba(250,250,248,0.25);">REEL</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Process Reel</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#0077B5;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">LinkedIn</span>
-        </div>
-        <div style="aspect-ratio:16/9; background: var(--blue); display:flex; align-items:center; justify-content:center; padding:1rem; text-align:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; color:var(--white); line-height:1.2; opacity:0.5;">CASE STUDY COVER</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Case Study: NOVA Brand</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#E1306C;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Instagram</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: linear-gradient(135deg, #EDF060, #15E6CD); display:flex; align-items:center; justify-content:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:2rem; color:rgba(60,55,68,0.3);">POST</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">New Year Campaign</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#FF0000;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">YouTube</span>
-        </div>
-        <div style="aspect-ratio:16/9; background: var(--graphite); display:flex; align-items:center; justify-content:center; position:relative;">
-          <span style="font-size:2rem; color:rgba(255,255,255,0.2);">▶</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Design Tutorial Series</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <div class="social-card-header" style="background: var(--graphite);">
-          <span class="social-dot" style="background:#E1306C;"></span>
-          <span class="social-platform" style="color: rgba(250,250,248,0.6);">Instagram</span>
-        </div>
-        <div style="aspect-ratio:1/1; background: linear-gradient(135deg, #F7A278, #3C3744); display:flex; align-items:center; justify-content:center;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:2rem; color:rgba(250,250,248,0.2);">POST</span>
-        </div>
-        <div style="padding: 0.6rem 0.9rem; background: var(--white);">
-          <span style="font-size:0.75rem; color: var(--graphite); font-weight:500;">Product Promo Series</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Code Projects -->
-  <section class="category-section" data-cat="code">
-    <div class="category-header">
-      <div class="category-icon-box" style="background: var(--graphite); color: var(--turquoise); font-size: 1rem; font-family:'Space Mono',monospace;">{ }</div>
-      <h2 class="category-title">CODE PROJECTS</h2>
-      <span class="category-count">4 Projects</span>
-    </div>
-    <div class="portfolio-grid-2">
-      <div class="code-card">
-        <span class="code-card-lang">React · TypeScript</span>
-        <div class="code-card-title">Design System Library</div>
-        <p class="code-card-desc">A component library built from scratch — tokens, primitives, and patterns for a client's design system. Fully documented and tested.</p>
-        <div class="code-card-tags">
-          <span class="code-tag">React</span>
-          <span class="code-tag">TypeScript</span>
-          <span class="code-tag">Storybook</span>
-          <span class="code-tag">CSS-in-JS</span>
-        </div>
-        <span class="code-card-corner">{ }</span>
-      </div>
-      <div class="code-card">
-        <span class="code-card-lang">Three.js · WebGL</span>
-        <div class="code-card-title">Interactive 3D Portfolio</div>
-        <p class="code-card-desc">An experimental portfolio built with Three.js and WebGL, featuring real-time 3D scene navigation and custom shader effects.</p>
-        <div class="code-card-tags">
-          <span class="code-tag">Three.js</span>
-          <span class="code-tag">WebGL</span>
-          <span class="code-tag">GLSL</span>
-          <span class="code-tag">JavaScript</span>
-        </div>
-        <span class="code-card-corner">{ }</span>
-      </div>
-      <div class="code-card">
-        <span class="code-card-lang">Python · OpenCV</span>
-        <div class="code-card-title">Generative Art Tool</div>
-        <p class="code-card-desc">A Python-based generative art generator using noise algorithms and color theory. Outputs high-resolution print-ready files.</p>
-        <div class="code-card-tags">
-          <span class="code-tag">Python</span>
-          <span class="code-tag">OpenCV</span>
-          <span class="code-tag">Perlin Noise</span>
-        </div>
-        <span class="code-card-corner">{ }</span>
-      </div>
-      <div class="code-card">
-        <span class="code-card-lang">Next.js · Sanity CMS</span>
-        <div class="code-card-title">Brand Website — NOVA</div>
-        <p class="code-card-desc">Full website build for a brand client. Designed and developed end-to-end, with CMS integration, animations, and full responsive layout.</p>
-        <div class="code-card-tags">
-          <span class="code-tag">Next.js</span>
-          <span class="code-tag">Sanity</span>
-          <span class="code-tag">Framer Motion</span>
-          <span class="code-tag">Vercel</span>
-        </div>
-        <span class="code-card-corner">{ }</span>
-      </div>
-    </div>
-  </section>
-
   <footer>
-    <div class="footer-logo">ALEX<span>.</span>DS</div>
+    <div class="footer-logo">alex<em>.</em></div>
     <ul class="footer-links">
-      <li><a href="#" onclick="showPage('home')">Home</a></li>
-      <li><a href="#" onclick="showPage('about')">About</a></li>
-      <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+      <li><a href="#" onclick="return showPage('home')">Home</a></li>
+      <li><a href="#" onclick="return showPage('about')">About</a></li>
+      <li><a href="#" onclick="return showPage('portfolio')">Work</a></li>
       <li><a href="mailto:hello@alexdesign.com">Contact</a></li>
     </ul>
-    <span class="footer-copy">© 2026 Alex Design. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Alex. All rights reserved.</span>
   </footer>
 </div>
+
+
+<!-- ══ SUB: 3D MODELS ══ -->
+<div id="sub-3d" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>3D Models</h1>
+    <p>Playing with form, light, and material in Blender and Fusion 360. Every piece is a small experiment.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-3">
+      <div class="proj-card" onclick="openModal({cat:'3D / Blender',year:'2025',title:'Chrome Vessel Series',desc:'A study in reflective materials and organic form. I was curious about how light behaves on curved metallic surfaces, so I challenged myself to create a set of vessels that feel both alien and familiar. Rendered in Cycles with custom HDRI lighting.',tags:['Blender','Cycles','Material Design','Product Render'],thumb:'linear-gradient(135deg,#1a1a2e,#3C3744)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'},{bg:'linear-gradient(135deg,#1a1a2e,#F7A278)',icon:'⬡'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Blender</span><span class="proj-year">2025</span></div><div class="proj-title">Chrome Vessel Series</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'3D / Abstract',year:'2025',title:'Liquid Glass Form',desc:'An exploration of transparency, refraction, and flowing geometry. I used Blender\'s geometry nodes to generate the base mesh and then hand-tuned the glass shader to get that satisfying depth.',tags:['Blender','Geometry Nodes','Glass Shader','Cycles'],thumb:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#008DD5)',icon:'◈'},{bg:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'◈'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Abstract</span><span class="proj-year">2025</span></div><div class="proj-title">Liquid Glass Form</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'3D / Product',year:'2024',title:'Organic Object Study',desc:'I wanted to see how far I could push Blender\'s sculpt tools to create objects that feel handmade. These three pieces were inspired by Japanese ceramic traditions and the satisfying weight of a well-designed everyday object.',tags:['Blender','Sculpt Mode','Texture Painting'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'◉',photos:[{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'◉'},{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◉'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">◉</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Product</span><span class="proj-year">2024</span></div><div class="proj-title">Organic Object Study</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'3D / Typography',year:'2024',title:'Sculptural Typography',desc:'What happens when letterforms become physical objects? I extruded and deformed a set of characters to create something that sits between type and sculpture. Printed two of these as actual resin pieces using Fusion 360 for the final geometry.',tags:['Blender','Fusion 360','Typography','3D Print'],thumb:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'⟡',photos:[{bg:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'⟡'},{bg:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'⟡'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">⟡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Typography</span><span class="proj-year">2024</span></div><div class="proj-title">Sculptural Typography</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'3D / Environment',year:'2024',title:'Minimal Scene Study',desc:'A quiet, composed scene — the kind of space you\'d want to sit in. I was practicing light placement and mood-building through minimal props and careful shadow work.',tags:['Blender','Cycles','Environment Design','Lighting'],thumb:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◈'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#2A2730,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Environment</span><span class="proj-year">2024</span></div><div class="proj-title">Minimal Scene Study</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'3D / Character',year:'2023',title:'Abstract Figure',desc:'My first character attempt — deliberately keeping it abstract to focus on proportions and pose rather than getting lost in facial details. Built in Blender with Fusion 360 used for some of the harder-edged structural elements.',tags:['Blender','Fusion 360','Character Design','Rigging Basics'],thumb:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'⬡'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Character</span><span class="proj-year">2023</span></div><div class="proj-title">Abstract Figure</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUB: PRODUCTS ══ -->
+<div id="sub-product" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>Products</h1>
+    <p>Thinking about how things are made, held, and used by real people.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-2">
+      <div class="proj-card" onclick="openModal({cat:'Product / Packaging',year:'2025',title:'Canister Series — Homeware Brand',desc:'A packaging system for a small homeware brand. The brief was to feel premium without being cold. I used warm materials, rounded forms, and a hand-drawn label aesthetic to keep the human touch front and center.',tags:['Product Design','Packaging','Branding','Blender Render'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▣',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▣'},{bg:'linear-gradient(135deg,#F7A278,#15E6CD)',icon:'▣'},{bg:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'▣'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">▣</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Packaging</span><span class="proj-year">2025</span></div><div class="proj-title">Canister Series — Homeware Brand</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Product / Concept',year:'2025',title:'Sneaker Collaboration Concept',desc:'A self-initiated concept exploring what a collab between a streetwear label and a craft ceramics studio might look like. The challenge: how do you apply organic, imperfect ceramic textures to a mass-manufactured form?',tags:['Concept Design','Blender','Fusion 360','Material Study'],thumb:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'◎'},{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'◎'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#F7A278,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Concept</span><span class="proj-year">2025</span></div><div class="proj-title">Sneaker Collaboration Concept</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Product / Objects',year:'2024',title:'Minimal Desk Object Collection',desc:'Three objects designed to live on your desk without demanding attention: a small tray, a pen rest, and a clip holder. The goal was to solve real friction in a workspace while keeping the forms quiet and considered.',tags:['Industrial Design','Fusion 360','Functional Design'],thumb:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'▦',photos:[{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'▦'},{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'▦'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#008DD5,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">▦</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Objects</span><span class="proj-year">2024</span></div><div class="proj-title">Minimal Desk Object Collection</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Product / Apparel',year:'2024',title:'Capsule Apparel Line',desc:'A five-piece capsule collection concept exploring how graphic design principles apply to garment decoration. Started with a color story, built out the graphics, then visualized the pieces in Blender.',tags:['Apparel Design','Blender','Adobe Illustrator','Graphic Design'],thumb:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◈'},{bg:'linear-gradient(135deg,#15E6CD,#F7A278)',icon:'◈'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Apparel</span><span class="proj-year">2024</span></div><div class="proj-title">Capsule Apparel Line</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUB: ARTWORK ══ -->
+<div id="sub-artwork" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>Artwork</h1>
+    <p>Personal work — illustration, mixed media, and experiments made just for the joy of it.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-masonry">
+      <div class="proj-card" onclick="openModal({cat:'Illustration',year:'2025',title:'Flora No. 1',desc:'Part of an ongoing series illustrating plants from my windowsill. I wanted to capture the specific quality of late afternoon light through leaves — that warm, slightly overexposed glow. Done in Procreate.',tags:['Procreate','Illustration','Digital Painting'],thumb:'linear-gradient(180deg,#F7A278,#3C3744)',icon:'✦',photos:[{bg:'linear-gradient(135deg,#F7A278,#15E6CD)',icon:'✦'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'✦'}]})">
+        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#F7A278,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">✦</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Illustration</span><span class="proj-year">2025</span></div><div class="proj-title">Flora No. 1</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Digital Art',year:'2025',title:'Glitch Study 03',desc:'I\'ve been fascinated by the aesthetics of digital failure — the colors and patterns that appear when data gets corrupted. This piece is a deliberately constructed version of that accident.',tags:['Adobe Photoshop','Digital Art','Glitch Art'],thumb:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◎'}]})">
+        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#3C3744,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Digital Art</span><span class="proj-year">2025</span></div><div class="proj-title">Glitch Study 03</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Mixed Media',year:'2024',title:'Figure in Blue',desc:'A mixed media piece combining a scanned watercolor wash with digital linework. The blue came first — just an accidental drip that became the whole mood of the piece.',tags:['Watercolor','Procreate','Mixed Media'],thumb:'linear-gradient(180deg,#008DD5,#3C3744)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'},{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'⬡'}]})">
+        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#008DD5,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Mixed Media</span><span class="proj-year">2024</span></div><div class="proj-title">Figure in Blue</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Print',year:'2024',title:'Manifesto Poster',desc:'A personal typographic poster made as an exercise in hierarchy and tone. The text is a short manifesto about what I believe good design should do. Printed as a risograph in two colors.',tags:['Adobe Illustrator','Typography','Risograph','Print Design'],thumb:'linear-gradient(135deg,#F7A278,#2A2730)',icon:'✦',photos:[{bg:'linear-gradient(135deg,#2A2730,#F7A278)',icon:'✦'}]})">
+        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#F7A278,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">✦</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Print</span><span class="proj-year">2024</span></div><div class="proj-title">Manifesto Poster</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Series',year:'2024',title:'Chromatic Study Series',desc:'Six pieces exploring how the same composition reads differently across different color relationships. Inspired by Josef Albers\' Interaction of Color but applied to more organic, loose forms.',tags:['Adobe Illustrator','Color Theory','Series'],thumb:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'◈'},{bg:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'◈'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Series</span><span class="proj-year">2024</span></div><div class="proj-title">Chromatic Study Series</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Editorial',year:'2023',title:'Magazine Editorial Spread',desc:'A university project: design a two-page spread for a hypothetical design magazine. I treated it as an opportunity to experiment with breaking grid conventions while keeping the reading experience clean.',tags:['Adobe InDesign','Editorial Design','Typography','Layout'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Editorial</span><span class="proj-year">2023</span></div><div class="proj-title">Magazine Editorial Spread</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUB: VISUAL GRAPHICS ══ -->
+<div id="sub-graphics" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>Visual Graphics</h1>
+    <p>Brand systems, identity design, typographic work, and motion.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-3">
+      <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Brand Identity',year:'2025',title:'Nova — Complete Brand System',desc:'A full brand identity for a fictional wellness tech startup. The challenge was balancing the warmth and humanity of wellness with the precision of technology. Every touchpoint had to feel cohesive and genuinely human.',tags:['Brand Identity','Figma','Adobe Illustrator','Motion Design'],thumb:'linear-gradient(135deg,#2A2730,#15E6CD)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'◈'},{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'◈'}]})">
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#2A2730,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Brand Identity</span><span class="proj-year">2025</span></div><div class="proj-title">Nova — Complete Brand System</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Logo Design',year:'2025',title:'Logo Collection 2025',desc:'A collection of marks I designed over the past year. I treat each logo as a small puzzle: what\'s the simplest form that carries the most meaning?',tags:['Adobe Illustrator','Figma','Logo Design'],thumb:'linear-gradient(135deg,#15E6CD,#008DD5)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◎'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Logo Design</span><span class="proj-year">2025</span></div><div class="proj-title">Logo Collection 2025</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Typography',year:'2024',title:'Expressive Type Poster',desc:'A poster built around a single sentence, exploring how far type can be pushed while still remaining legible. Seven iterations, each one looser than the last.',tags:['Adobe Illustrator','Typography','Poster Design'],thumb:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'▦',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▦'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">▦</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Typography</span><span class="proj-year">2024</span></div><div class="proj-title">Expressive Type Poster</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Data Visualization',year:'2024',title:'Annual Report Infographics',desc:'Turning a dense 40-page report into something people might actually read. I worked with the client to identify the five key stories in the data and designed visual systems around each one.',tags:['Adobe Illustrator','Figma','Data Design','Information Design'],thumb:'linear-gradient(135deg,#008DD5,#2A2730)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'⬡'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Data Visualization</span><span class="proj-year">2024</span></div><div class="proj-title">Annual Report Infographics</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+      <div class="proj-card" onclick="openModal({cat:'Motion Graphics',year:'2024',title:'Brand Animation Loop',desc:'A 12-second looping animation for the Nova brand. I built the motion principles first — what does this brand feel like when it moves? — and worked backwards into the individual pieces.',tags:['After Effects','Motion Design','Brand Animation'],thumb:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈'}]})">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Motion Graphics</span><span class="proj-year">2024</span></div><div class="proj-title">Brand Animation Loop</div><div class="proj-hint">↗ tap to view</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUB: SOCIAL MEDIA ══ -->
+<div id="sub-social" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>Social Media</h1>
+    <p>Content that earns attention rather than demanding it.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-4">
+      <div class="social-card" onclick="openModal({cat:'Social / Instagram',year:'2025',title:'Summer Campaign \'25',desc:'A summer campaign for a local café — warm gradients, hand-drawn type accents, and a grid strategy built around a coherent color story rather than individual posts.',tags:['Adobe Illustrator','Figma','Social Strategy','Instagram'],thumb:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'☀',photos:[{bg:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'☀'},{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'☀'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#E1306C;"></span><span class="social-platform">Instagram</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#F7A278,#008DD5);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">☀</div>
+        <div class="social-label">Summer Campaign '25</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / Instagram',year:'2025',title:'Tech Brand Launch',desc:'Launch content for a new app — clean, grid-breaking layouts that stood out in a sea of overly polished tech marketing.',tags:['Figma','Adobe Photoshop','Social Content'],thumb:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'⚡',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'⚡'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#E1306C;"></span><span class="social-platform">Instagram</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#008DD5,#15E6CD);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">⚡</div>
+        <div class="social-label">Tech Brand Launch</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / Twitter',year:'2025',title:'Design Quote Series',desc:'A weekly series of typographic quotes about design, made to be shareable without feeling like content. Deliberately lo-fi.',tags:['Adobe Illustrator','Typography','Content Series'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'💬',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'💬'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#1DA1F2;"></span><span class="social-platform">Twitter / X</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#3C3744,#F7A278);display:flex;align-items:center;justify-content:center;padding:1rem;"><span style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);text-align:center;font-style:italic;line-height:1.4;">"Design is communication."</span></div>
+        <div class="social-label">Design Quote Series</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / Instagram',year:'2024',title:'Process Reel',desc:'Behind-the-scenes content showing the messy, real process of making something. Performed better than any polished post I\'ve made.',tags:['Video Editing','CapCut','Social Strategy'],thumb:'linear-gradient(135deg,#2A2730,#15E6CD)',icon:'🎬',photos:[{bg:'linear-gradient(135deg,#2A2730,#15E6CD)',icon:'🎬'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#E1306C;"></span><span class="social-platform">Instagram</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#2A2730,#15E6CD);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🎬</div>
+        <div class="social-label">Process Reel</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / LinkedIn',year:'2025',title:'Nova Case Study',desc:'A carousel case study for LinkedIn walking through the Nova brand project from brief to final system.',tags:['Figma','Case Study','LinkedIn','Presentation Design'],thumb:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'📋',photos:[{bg:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'📋'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#0077B5;"></span><span class="social-platform">LinkedIn</span></div>
+        <div class="social-thumb" style="aspect-ratio:16/9;background:linear-gradient(135deg,#008DD5,#3C3744);display:flex;align-items:center;justify-content:center;font-size:2rem;">📋</div>
+        <div class="social-label">Nova Case Study</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / Instagram',year:'2025',title:'New Year Campaign',desc:'A New Year campaign for a personal project — bright, energetic, and made to feel like the start of something.',tags:['Adobe Illustrator','Motion Design','Social Content'],thumb:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'✨',photos:[{bg:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'✨'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#E1306C;"></span><span class="social-platform">Instagram</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#15E6CD,#2A2730);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">✨</div>
+        <div class="social-label">New Year Campaign</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / YouTube',year:'2024',title:'Design Tutorial Series',desc:'Short tutorials on specific design micro-skills — typeface pairing, negative space, color theory basics. Made for students like me.',tags:['Video Production','After Effects','Tutorial Design'],thumb:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'▶',photos:[{bg:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'▶'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#FF0000;"></span><span class="social-platform">YouTube</span></div>
+        <div class="social-thumb" style="aspect-ratio:16/9;background:linear-gradient(135deg,#2A2730,#008DD5);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,.35);">▶</div>
+        <div class="social-label">Design Tutorial Series</div>
+      </div>
+      <div class="social-card" onclick="openModal({cat:'Social / Instagram',year:'2024',title:'Product Promo Series',desc:'A product photography-style series for a small brand — plain backdrops, careful light, and a lot of trial and error.',tags:['Photography','Adobe Lightroom','Social Content'],thumb:'linear-gradient(135deg,#F7A278,#2A2730)',icon:'📦',photos:[{bg:'linear-gradient(135deg,#F7A278,#2A2730)',icon:'📦'}]})">
+        <div class="social-header"><span class="social-dot" style="background:#E1306C;"></span><span class="social-platform">Instagram</span></div>
+        <div class="social-thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#F7A278,#2A2730);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">📦</div>
+        <div class="social-label">Product Promo Series</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUB: CODE PROJECTS ══ -->
+<div id="sub-code" class="subpage">
+  <div class="subpage-hero">
+    <button class="subpage-back" onclick="closeSubpage()">← Back to work</button>
+    <h1>Code Projects</h1>
+    <p>Building as a designer — tools, experiences, and experiments in code.</p>
+  </div>
+  <div class="subpage-body">
+    <div class="proj-grid-2">
+      <div class="code-card" onclick="openModal({cat:'Code / React',year:'2025',title:'Design System Library',desc:'A component library built for a client — tokens, primitives, and documented patterns. I designed it first in Figma then built it in React, which gave me a real appreciation for the translation work involved.',tags:['React','TypeScript','Storybook','CSS-in-JS','GitHub','VS Code'],thumb:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'{ }',photos:[{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'{ }'},{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'{ }'}]})">
+        <span class="code-lang">React · TypeScript</span>
+        <div class="code-title">Design System Library</div>
+        <p class="code-desc">Designed in Figma, built in React — tokens, primitives, and patterns, documented in Storybook.</p>
+        <div class="code-tags"><span class="code-tag">React</span><span class="code-tag">TypeScript</span><span class="code-tag">Storybook</span><span class="code-tag">GitHub</span><span class="code-tag">VS Code</span></div>
+      </div>
+      <div class="code-card" onclick="openModal({cat:'Code / Three.js',year:'2025',title:'Interactive 3D Portfolio',desc:'An experiment: what if a portfolio was a place you navigated rather than scrolled? Built with Three.js, with custom shaders written in GLSL — mostly by reading docs and being stubborn.',tags:['Three.js','WebGL','GLSL','JavaScript','GitHub','VS Code'],thumb:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◈'}]})">
+        <span class="code-lang">Three.js · WebGL</span>
+        <div class="code-title">Interactive 3D Portfolio</div>
+        <p class="code-desc">A 3D-navigable portfolio in Three.js — real-time scenes, custom shaders, a camera you move through.</p>
+        <div class="code-tags"><span class="code-tag">Three.js</span><span class="code-tag">WebGL</span><span class="code-tag">GLSL</span><span class="code-tag">GitHub</span><span class="code-tag">VS Code</span></div>
+      </div>
+      <div class="code-card" onclick="openModal({cat:'Code / Python',year:'2024',title:'Generative Art Tool',desc:'A Python script that generates print-ready art using Perlin noise and a color palette I define at the top of the file. Every run is different. I\'ve printed about twenty of these.',tags:['Python','OpenCV','Perlin Noise','GitHub','VS Code'],thumb:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'~',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'~'}]})">
+        <span class="code-lang">Python · OpenCV</span>
+        <div class="code-title">Generative Art Tool</div>
+        <p class="code-desc">A generative art script using Perlin noise and custom palettes. Every output is unique — printed about twenty so far.</p>
+        <div class="code-tags"><span class="code-tag">Python</span><span class="code-tag">OpenCV</span><span class="code-tag">Perlin Noise</span><span class="code-tag">GitHub</span><span class="code-tag">VS Code</span></div>
+      </div>
+      <div class="code-card" onclick="openModal({cat:'Code / Next.js',year:'2024',title:'Brand Website — NOVA',desc:'End-to-end design and development for the Nova brand — designed in Figma, built in Next.js with Sanity as the CMS. Translating my own design to code taught me more about design constraints than anything else I\'ve done.',tags:['Next.js','Sanity CMS','Framer Motion','Vercel','GitHub','VS Code'],thumb:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'⊡',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'⊡'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⊡'}]})">
+        <span class="code-lang">Next.js · Sanity CMS</span>
+        <div class="code-title">Brand Website — NOVA</div>
+        <p class="code-desc">Designed and built end-to-end. Figma to Next.js with Sanity CMS, Framer Motion, deployed on Vercel.</p>
+        <div class="code-tags"><span class="code-tag">Next.js</span><span class="code-tag">Sanity</span><span class="code-tag">Framer Motion</span><span class="code-tag">GitHub</span><span class="code-tag">VS Code</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, button, .portfolio-card, .code-card, .social-card, .service-card').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-  });
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; });
+document.querySelectorAll('a,button,.proj-card,.code-card,.social-card,.service-card,.category-row,.teaser-card,.approach-card,.value-item,.resume-entry').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
 
-  // Page switching
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById(id).classList.add('active', 'page-enter');
-    document.getElementById('nav-' + id).classList.add('active');
-    window.scrollTo(0, 0);
-    setTimeout(() => document.getElementById(id).classList.remove('page-enter'), 400);
-    return false;
-  }
+// Page nav
+function showPage(id) {
+  document.querySelectorAll('.subpage').forEach(s => s.classList.remove('active'));
+  document.getElementById('breadcrumb').classList.remove('visible');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const pg = document.getElementById(id);
+  pg.classList.add('active','enter');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(() => pg.classList.remove('enter'), 400);
+  return false;
+}
 
-  // Portfolio filter
-  function filterPortfolio(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.category-section').forEach(s => {
-      if (cat === 'all') {
-        s.style.display = '';
-      } else {
-        s.style.display = s.dataset.cat === cat ? '' : 'none';
-      }
-    });
+// Subpages
+const subLabels = {'sub-3d':'3D Models','sub-product':'Products','sub-artwork':'Artwork','sub-graphics':'Visual Graphics','sub-social':'Social Media','sub-code':'Code Projects'};
+function openSubpage(id) {
+  document.getElementById('portfolio').classList.remove('active');
+  document.querySelectorAll('.subpage').forEach(s => s.classList.remove('active'));
+  const sub = document.getElementById(id);
+  sub.classList.add('active','enter');
+  document.getElementById('breadcrumb').classList.add('visible');
+  document.getElementById('breadcrumb-label').textContent = subLabels[id];
+  window.scrollTo(0,0);
+  setTimeout(() => sub.classList.remove('enter'), 400);
+}
+function closeSubpage() {
+  document.querySelectorAll('.subpage').forEach(s => s.classList.remove('active'));
+  document.getElementById('breadcrumb').classList.remove('visible');
+  document.getElementById('portfolio').classList.add('active','enter');
+  window.scrollTo(0,0);
+  setTimeout(() => document.getElementById('portfolio').classList.remove('enter'), 400);
+}
+
+// Modal
+function openModal(data) {
+  document.getElementById('modal-cat').textContent = data.cat;
+  document.getElementById('modal-year').textContent = data.year;
+  document.getElementById('modal-title').textContent = data.title;
+  document.getElementById('modal-desc').textContent = data.desc;
+  const hero = document.getElementById('modal-hero');
+  hero.style.background = data.thumb;
+  hero.textContent = data.icon;
+  document.getElementById('modal-tags').innerHTML = data.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  document.getElementById('modal-photos').innerHTML = data.photos.map(p=>`<div class="modal-photo" style="background:${p.bg}">${p.icon}</div>`).join('');
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal-backdrop') || e.currentTarget.classList.contains('modal-close')) {
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
   }
+}
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal({target:document.getElementById('modal-backdrop')}); });
 </script>
 </body>
 </html>
