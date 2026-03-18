@@ -684,15 +684,21 @@ footer {
     <p>Spanning 3D, product, illustration, graphics, and more.</p>
     <div class="teaser-grid">
       <div class="teaser-card" onclick="showPage('portfolio')">
-        <div class="teaser-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD);">⬡</div>
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD);">
+          <img src="images/home/teaser-1.jpg" alt="Chrome Vessel Series" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
         <div class="teaser-info"><span>3D / Blender</span><strong>Chrome Vessel Series</strong></div>
       </div>
       <div class="teaser-card" onclick="showPage('portfolio')">
-        <div class="teaser-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744);">▣</div>
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744);">
+          <img src="images/home/teaser-2.jpg" alt="Canister Series" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
         <div class="teaser-info"><span>Product Design</span><strong>Canister Series</strong></div>
       </div>
       <div class="teaser-card" onclick="showPage('portfolio')">
-        <div class="teaser-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730);">◈</div>
+        <div class="teaser-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730);">
+          <img src="images/home/teaser-3.jpg" alt="Nova Brand System" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
         <div class="teaser-info"><span>Brand Identity</span><strong>Nova Brand System</strong></div>
       </div>
     </div>
@@ -733,8 +739,11 @@ footer {
     </p>
     <div class="about-cards-row">
       <div class="about-photo-card">
-        <span class="about-initials">AD</span>
-        <span class="about-photo-hint">your photo</span>
+        <img src="images/about/profile.jpg" alt="Emma Huberty" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="about-photo-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+          <span class="about-initials">EH</span>
+          <span class="about-photo-hint">add images/about/profile.jpg</span>
+        </div>
       </div>
       <div class="about-chip-col">
         <span class="about-chip pop">Human-centered design</span>
@@ -936,27 +945,45 @@ footer {
   <div class="subpage-body">
     <div class="proj-grid-3">
       <div class="proj-card" onclick="openModal({cat:'3D / Blender',year:'2025',title:'Chrome Vessel Series',desc:'A study in reflective materials and organic form. I was curious about how light behaves on curved metallic surfaces, so I challenged myself to create a set of vessels that feel both alien and familiar. Rendered in Cycles with custom HDRI lighting.',tags:['Blender','Cycles','Material Design','Product Render'],thumb:'linear-gradient(135deg,#1a1a2e,#3C3744)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'},{bg:'linear-gradient(135deg,#1a1a2e,#F7A278)',icon:'⬡'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/3d/chrome-vessel.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⬡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Blender</span><span class="proj-year">2025</span></div><div class="proj-title">Chrome Vessel Series</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'3D / Abstract',year:'2025',title:'Liquid Glass Form',desc:'An exploration of transparency, refraction, and flowing geometry. I used Blender\'s geometry nodes to generate the base mesh and then hand-tuned the glass shader to get that satisfying depth.',tags:['Blender','Geometry Nodes','Glass Shader','Cycles'],thumb:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#008DD5)',icon:'◈'},{bg:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'◈'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#15E6CD);position:relative;overflow:hidden;">
+          <img src="images/3d/liquid-glass.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Abstract</span><span class="proj-year">2025</span></div><div class="proj-title">Liquid Glass Form</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'3D / Product',year:'2024',title:'Organic Object Study',desc:'I wanted to see how far I could push Blender\'s sculpt tools to create objects that feel handmade. These three pieces were inspired by Japanese ceramic traditions and the satisfying weight of a well-designed everyday object.',tags:['Blender','Sculpt Mode','Texture Painting'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'◉',photos:[{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'◉'},{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◉'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">◉</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#F7A278);position:relative;overflow:hidden;">
+          <img src="images/3d/organic-object.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◉</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Product</span><span class="proj-year">2024</span></div><div class="proj-title">Organic Object Study</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'3D / Typography',year:'2024',title:'Sculptural Typography',desc:'What happens when letterforms become physical objects? I extruded and deformed a set of characters to create something that sits between type and sculpture. Printed two of these as actual resin pieces using Fusion 360 for the final geometry.',tags:['Blender','Fusion 360','Typography','3D Print'],thumb:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'⟡',photos:[{bg:'linear-gradient(135deg,#15E6CD,#2A2730)',icon:'⟡'},{bg:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'⟡'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">⟡</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#2A2730);position:relative;overflow:hidden;">
+          <img src="images/3d/sculptural-type.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⟡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Typography</span><span class="proj-year">2024</span></div><div class="proj-title">Sculptural Typography</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'3D / Environment',year:'2024',title:'Minimal Scene Study',desc:'A quiet, composed scene — the kind of space you\'d want to sit in. I was practicing light placement and mood-building through minimal props and careful shadow work.',tags:['Blender','Cycles','Environment Design','Lighting'],thumb:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◈'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#2A2730,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#2A2730,#008DD5);position:relative;overflow:hidden;">
+          <img src="images/3d/minimal-scene.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Environment</span><span class="proj-year">2024</span></div><div class="proj-title">Minimal Scene Study</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'3D / Character',year:'2023',title:'Abstract Figure',desc:'My first character attempt — deliberately keeping it abstract to focus on proportions and pose rather than getting lost in facial details. Built in Blender with Fusion 360 used for some of the harder-edged structural elements.',tags:['Blender','Fusion 360','Character Design','Rigging Basics'],thumb:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'⬡'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#15E6CD);position:relative;overflow:hidden;">
+          <img src="images/3d/abstract-figure.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⬡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">3D / Character</span><span class="proj-year">2023</span></div><div class="proj-title">Abstract Figure</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
     </div>
@@ -973,19 +1000,31 @@ footer {
   <div class="subpage-body">
     <div class="proj-grid-2">
       <div class="proj-card" onclick="openModal({cat:'Product / Packaging',year:'2025',title:'Canister Series — Homeware Brand',desc:'A packaging system for a small homeware brand. The brief was to feel premium without being cold. I used warm materials, rounded forms, and a hand-drawn label aesthetic to keep the human touch front and center.',tags:['Product Design','Packaging','Branding','Blender Render'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▣',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▣'},{bg:'linear-gradient(135deg,#F7A278,#15E6CD)',icon:'▣'},{bg:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'▣'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">▣</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278);position:relative;overflow:hidden;">
+          <img src="images/products/canister.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">▣</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Packaging</span><span class="proj-year">2025</span></div><div class="proj-title">Canister Series — Homeware Brand</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Product / Concept',year:'2025',title:'Sneaker Collaboration Concept',desc:'A self-initiated concept exploring what a collab between a streetwear label and a craft ceramics studio might look like. The challenge: how do you apply organic, imperfect ceramic textures to a mass-manufactured form?',tags:['Concept Design','Blender','Fusion 360','Material Study'],thumb:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'◎'},{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'◎'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#F7A278,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#F7A278,#008DD5);position:relative;overflow:hidden;">
+          <img src="images/products/sneaker.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◎</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Concept</span><span class="proj-year">2025</span></div><div class="proj-title">Sneaker Collaboration Concept</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Product / Objects',year:'2024',title:'Minimal Desk Object Collection',desc:'Three objects designed to live on your desk without demanding attention: a small tray, a pen rest, and a clip holder. The goal was to solve real friction in a workspace while keeping the forms quiet and considered.',tags:['Industrial Design','Fusion 360','Functional Design'],thumb:'linear-gradient(135deg,#008DD5,#3C3744)',icon:'▦',photos:[{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'▦'},{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'▦'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#008DD5,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">▦</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#008DD5,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/products/desk-objects.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">▦</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Objects</span><span class="proj-year">2024</span></div><div class="proj-title">Minimal Desk Object Collection</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Product / Apparel',year:'2024',title:'Capsule Apparel Line',desc:'A five-piece capsule collection concept exploring how graphic design principles apply to garment decoration. Started with a color story, built out the graphics, then visualized the pieces in Blender.',tags:['Apparel Design','Blender','Adobe Illustrator','Graphic Design'],thumb:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◈'},{bg:'linear-gradient(135deg,#15E6CD,#F7A278)',icon:'◈'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/products/apparel.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Product / Apparel</span><span class="proj-year">2024</span></div><div class="proj-title">Capsule Apparel Line</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
     </div>
@@ -1002,27 +1041,45 @@ footer {
   <div class="subpage-body">
     <div class="proj-grid-masonry">
       <div class="proj-card" onclick="openModal({cat:'Illustration',year:'2025',title:'Flora No. 1',desc:'Part of an ongoing series illustrating plants from my windowsill. I wanted to capture the specific quality of late afternoon light through leaves — that warm, slightly overexposed glow. Done in Procreate.',tags:['Procreate','Illustration','Digital Painting'],thumb:'linear-gradient(180deg,#F7A278,#3C3744)',icon:'✦',photos:[{bg:'linear-gradient(135deg,#F7A278,#15E6CD)',icon:'✦'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'✦'}]})">
-        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#F7A278,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">✦</span></div></div>
+        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#F7A278,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/artwork/flora.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">✦</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Illustration</span><span class="proj-year">2025</span></div><div class="proj-title">Flora No. 1</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Digital Art',year:'2025',title:'Glitch Study 03',desc:'I\'ve been fascinated by the aesthetics of digital failure — the colors and patterns that appear when data gets corrupted. This piece is a deliberately constructed version of that accident.',tags:['Adobe Photoshop','Digital Art','Glitch Art'],thumb:'linear-gradient(135deg,#3C3744,#15E6CD)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◎'}]})">
-        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#3C3744,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#3C3744,#15E6CD);position:relative;overflow:hidden;">
+          <img src="images/artwork/glitch.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◎</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Digital Art</span><span class="proj-year">2025</span></div><div class="proj-title">Glitch Study 03</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Mixed Media',year:'2024',title:'Figure in Blue',desc:'A mixed media piece combining a scanned watercolor wash with digital linework. The blue came first — just an accidental drip that became the whole mood of the piece.',tags:['Watercolor','Procreate','Mixed Media'],thumb:'linear-gradient(180deg,#008DD5,#3C3744)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'},{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'⬡'}]})">
-        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#008DD5,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-thumb tall" style="background:linear-gradient(180deg,#008DD5,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/artwork/figure-blue.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⬡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Mixed Media</span><span class="proj-year">2024</span></div><div class="proj-title">Figure in Blue</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Print',year:'2024',title:'Manifesto Poster',desc:'A personal typographic poster made as an exercise in hierarchy and tone. The text is a short manifesto about what I believe good design should do. Printed as a risograph in two colors.',tags:['Adobe Illustrator','Typography','Risograph','Print Design'],thumb:'linear-gradient(135deg,#F7A278,#2A2730)',icon:'✦',photos:[{bg:'linear-gradient(135deg,#2A2730,#F7A278)',icon:'✦'}]})">
-        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#F7A278,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">✦</span></div></div>
+        <div class="proj-thumb sq" style="background:linear-gradient(135deg,#F7A278,#2A2730);position:relative;overflow:hidden;">
+          <img src="images/artwork/manifesto.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">✦</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Print</span><span class="proj-year">2024</span></div><div class="proj-title">Manifesto Poster</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Series',year:'2024',title:'Chromatic Study Series',desc:'Six pieces exploring how the same composition reads differently across different color relationships. Inspired by Josef Albers\' Interaction of Color but applied to more organic, loose forms.',tags:['Adobe Illustrator','Color Theory','Series'],thumb:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'◈'},{bg:'linear-gradient(135deg,#F7A278,#008DD5)',icon:'◈'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#15E6CD,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/products/apparel.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Series</span><span class="proj-year">2024</span></div><div class="proj-title">Chromatic Study Series</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Editorial',year:'2023',title:'Magazine Editorial Spread',desc:'A university project: design a two-page spread for a hypothetical design magazine. I treated it as an opportunity to experiment with breaking grid conventions while keeping the reading experience clean.',tags:['Adobe InDesign','Editorial Design','Typography','Layout'],thumb:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'⬡'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'⬡'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#3C3744,#F7A278);position:relative;overflow:hidden;">
+          <img src="images/artwork/editorial.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⬡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Editorial</span><span class="proj-year">2023</span></div><div class="proj-title">Magazine Editorial Spread</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
     </div>
@@ -1039,23 +1096,38 @@ footer {
   <div class="subpage-body">
     <div class="proj-grid-3">
       <div class="proj-card" style="grid-column:span 2;" onclick="openModal({cat:'Brand Identity',year:'2025',title:'Nova — Complete Brand System',desc:'A full brand identity for a fictional wellness tech startup. The challenge was balancing the warmth and humanity of wellness with the precision of technology. Every touchpoint had to feel cohesive and genuinely human.',tags:['Brand Identity','Figma','Adobe Illustrator','Motion Design'],thumb:'linear-gradient(135deg,#2A2730,#15E6CD)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#15E6CD,#3C3744)',icon:'◈'},{bg:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'◈'},{bg:'linear-gradient(135deg,#008DD5,#F7A278)',icon:'◈'}]})">
-        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#2A2730,#15E6CD)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb wide" style="background:linear-gradient(135deg,#2A2730,#15E6CD);position:relative;overflow:hidden;">
+          <img src="images/graphics/nova-brand.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Brand Identity</span><span class="proj-year">2025</span></div><div class="proj-title">Nova — Complete Brand System</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Logo Design',year:'2025',title:'Logo Collection 2025',desc:'A collection of marks I designed over the past year. I treat each logo as a small puzzle: what\'s the simplest form that carries the most meaning?',tags:['Adobe Illustrator','Figma','Logo Design'],thumb:'linear-gradient(135deg,#15E6CD,#008DD5)',icon:'◎',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◎'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◎</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#15E6CD,#008DD5);position:relative;overflow:hidden;">
+          <img src="images/graphics/logos.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◎</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Logo Design</span><span class="proj-year">2025</span></div><div class="proj-title">Logo Collection 2025</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Typography',year:'2024',title:'Expressive Type Poster',desc:'A poster built around a single sentence, exploring how far type can be pushed while still remaining legible. Seven iterations, each one looser than the last.',tags:['Adobe Illustrator','Typography','Poster Design'],thumb:'linear-gradient(135deg,#F7A278,#3C3744)',icon:'▦',photos:[{bg:'linear-gradient(135deg,#3C3744,#F7A278)',icon:'▦'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744)"><div class="thumb-inner"><span class="thumb-icon">▦</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#F7A278,#3C3744);position:relative;overflow:hidden;">
+          <img src="images/graphics/type-poster.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">▦</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Typography</span><span class="proj-year">2024</span></div><div class="proj-title">Expressive Type Poster</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Data Visualization',year:'2024',title:'Annual Report Infographics',desc:'Turning a dense 40-page report into something people might actually read. I worked with the client to identify the five key stories in the data and designed visual systems around each one.',tags:['Adobe Illustrator','Figma','Data Design','Information Design'],thumb:'linear-gradient(135deg,#008DD5,#2A2730)',icon:'⬡',photos:[{bg:'linear-gradient(135deg,#2A2730,#008DD5)',icon:'⬡'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#2A2730)"><div class="thumb-inner"><span class="thumb-icon">⬡</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#008DD5,#2A2730);position:relative;overflow:hidden;">
+          <img src="images/graphics/data-viz.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">⬡</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Data Visualization</span><span class="proj-year">2024</span></div><div class="proj-title">Annual Report Infographics</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
       <div class="proj-card" onclick="openModal({cat:'Motion Graphics',year:'2024',title:'Brand Animation Loop',desc:'A 12-second looping animation for the Nova brand. I built the motion principles first — what does this brand feel like when it moves? — and worked backwards into the individual pieces.',tags:['After Effects','Motion Design','Brand Animation'],thumb:'linear-gradient(135deg,#3C3744,#008DD5)',icon:'◈',photos:[{bg:'linear-gradient(135deg,#008DD5,#15E6CD)',icon:'◈'}]})">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#008DD5)"><div class="thumb-inner"><span class="thumb-icon">◈</span></div></div>
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#3C3744,#008DD5);position:relative;overflow:hidden;">
+          <img src="images/graphics/brand-animation.jpg" alt="" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+          <div class="thumb-inner" style="position:relative;z-index:2;"><span class="thumb-icon">◈</span></div>
+        </div>
         <div class="proj-info"><div class="proj-info-top"><span class="proj-cat">Motion Graphics</span><span class="proj-year">2024</span></div><div class="proj-title">Brand Animation Loop</div><div class="proj-hint">↗ tap to view</div></div>
       </div>
     </div>
@@ -1198,9 +1270,13 @@ function openModal(data) {
   document.getElementById('modal-desc').textContent = data.desc;
   const hero = document.getElementById('modal-hero');
   hero.style.background = data.thumb;
-  hero.textContent = data.icon;
+  if (data.img) {
+    hero.innerHTML = '<img src="' + data.img + '" alt="" onerror="this.style.display=\'none\'" style="width:100%;height:100%;object-fit:cover;">';
+  } else {
+    hero.textContent = data.icon;
+  }
   document.getElementById('modal-tags').innerHTML = data.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
-  document.getElementById('modal-photos').innerHTML = data.photos.map(p=>`<div class="modal-photo" style="background:${p.bg}">${p.icon}</div>`).join('');
+  document.getElementById('modal-photos').innerHTML = data.photos.map((p,i)=>`<div class="modal-photo" style="background:${p.bg};position:relative;overflow:hidden;">${p.img ? '<img src="'+p.img+'" alt="" onerror="this.style.display=none" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">' : ''}<span style="position:relative;z-index:1;font-size:2rem">${p.icon}</span></div>`).join('');
   document.getElementById('modal-backdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
